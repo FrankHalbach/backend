@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
+    username: vfin_usr
+    password: root
+  sql:
+    init:
+      mode: always      # always run schema/data.sql (optional, default is 'embedded')
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  #flyway:
+  #  url: jdbc:oracle:thin:@localhost:1521/XEPDB1
+   # user: vfin_usr
+   # password: root
+   # schemas: vfin
+
+
