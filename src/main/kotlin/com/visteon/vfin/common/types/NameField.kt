@@ -17,6 +17,5 @@ value class NameField private constructor(val value: String) {
             return NameField(trimmed)
         }
     }
-    fun toLower() = NameField(value.lowercase())
     override fun toString() = value
 }

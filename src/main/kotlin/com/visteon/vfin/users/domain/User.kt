@@ -1,7 +1,6 @@
 package com.visteon.vfin.users.domain
 
 import com.visteon.vfin.common.types.NameField
-import com.visteon.vfin.users.domain.UserId
 
 data class User(
     val userId: UserId,

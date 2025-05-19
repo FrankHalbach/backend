@@ -28,7 +28,7 @@ class UserRepositoryImpl(
       val dbUsr = crudRepo.findByUserId(updated.userId.value)
          ?: throw NoSuchElementException("User with ID ${updated.userId.value} not found")
 
-      val entity = updated.toEntity(dbUsr.id);
+      val entity = updated.toEntity(dbUsr.id)
 
       return crudRepo.save(entity).toDomain()
    }

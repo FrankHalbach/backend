@@ -11,10 +11,4 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-  #flyway:
-  #  url: jdbc:oracle:thin:@localhost:1521/XEPDB1
-   # user: vfin_usr
-   # password: root
-   # schemas: vfin
-
 
