@@ -17,16 +17,16 @@ data class UserEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column(nullable = false, unique = true, length = UserId.Companion.MAX_LENGTH)
+    @Column(nullable = false, unique = true)
     val userId: String ="",
 
-    @Column(nullable = false, length = NameField.Companion.MAX_LENGTH)
+    @Column(nullable = false)
     val firstName: String ="",
 
-    @Column(nullable = false, length = NameField.Companion.MAX_LENGTH)
+    @Column(nullable = false)
     val lastName: String ="",
 
-    @Column(nullable = false, unique = true, length = EmailAddress.Companion.MAX_LENGTH)
+    @Column(nullable = false, unique = true)
     val email: String=""
 )
 

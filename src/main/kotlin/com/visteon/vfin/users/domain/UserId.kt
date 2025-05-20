@@ -1,20 +1,22 @@
 package com.visteon.vfin.users.domain
 
+import com.visteon.vfin.common.validation.assertMatchesRegex
+import com.visteon.vfin.common.validation.assertNotEmpty
+
 @JvmInline
 value class UserId private constructor(val value: String) {
     companion object {
-        const val MIN_LENGTH = 1
-        const val MAX_LENGTH = 16
-        val REGEX = Regex("^[a-zA-Z0-9]+$")
+        const val NAME = "UserId"
+        const val REGEX_PATTERN = "^[a-zA-Z0-9]{1,16}$"
+        const val VALIDATION_MESSAGE = "UserId must be 1–16 alphanumeric characters (a–z, A–Z, 0–9)."
+
+        val REGEX = Regex(this.REGEX_PATTERN)
 
         operator fun invoke(input: String): UserId {
             val normalized = input.trim().lowercase()
-            require(normalized.length in MIN_LENGTH..MAX_LENGTH) {
-                "UserId must be $MIN_LENGTH to $MAX_LENGTH characters."
-            }
-            require(REGEX.matches(normalized)) {
-                "UserId must match regex: ${REGEX.pattern}"
-            }
+                .assertNotEmpty(NAME)
+                .assertMatchesRegex(REGEX, NAME)
+
             return UserId(normalized)
         }
     }

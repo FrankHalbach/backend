@@ -6,6 +6,7 @@ import com.visteon.vfin.users.application.GetAllUsersQueryHandler
 import com.visteon.vfin.users.application.GetUserByUserIdQueryHandler
 import com.visteon.vfin.users.application.UpdateUserCommand
 import com.visteon.vfin.users.application.UpdateUserCommandHandler
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -19,7 +20,7 @@ class UserController(
     ) {
 
     @PostMapping
-    fun createUser(@RequestBody command: CreateUserCommand): ResponseEntity<UserResponse> {
+    fun createUser(@Valid @RequestBody command: CreateUserCommand): ResponseEntity<UserResponse> {
         val user = createUser.handle(command)
         return  ResponseEntity.ok(user.toResponse())
     }
@@ -27,7 +28,7 @@ class UserController(
     @PutMapping("/{userId}")
     fun updateUser(
         @PathVariable userId: String,
-        @RequestBody body: UpdateUserCommand
+        @Valid @RequestBody body: UpdateUserCommand
     ): ResponseEntity<UserResponse> {
         val updated = updateUser.handle(userId, body)
         return ResponseEntity.ok(updated.toResponse())
