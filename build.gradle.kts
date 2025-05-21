@@ -36,6 +36,8 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     //runtimeOnly("com.h2database:h2")
 
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 
