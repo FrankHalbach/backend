@@ -38,7 +38,7 @@ fun UserEntity.toDomain(): User =
         userId = UserId(this.userId),
         firstName = NameField(this.firstName),
         lastName = NameField(this.lastName),
-        email = NameField(this.email)
+        email = EmailAddress(this.email)
     )
 
 fun User.toEntity(id:Long?): UserEntity =
