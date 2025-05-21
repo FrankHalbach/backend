@@ -37,12 +37,12 @@ class UserController(
     @GetMapping("/{userId}")
     fun getUser(@PathVariable userId: String): ResponseEntity<UserResponse> =
         getUserByUserId.handle(userId)
-            ?.let { ResponseEntity.ok(it) }
+            ?. let { ResponseEntity.ok(it.toResponse()) }
             ?: ResponseEntity.notFound().build()
 
     @GetMapping
     fun getAllUsers(): ResponseEntity<List<UserResponse>> {
-        val result = getAllUsers.handle()
+        val result = getAllUsers.handle().map { user -> user.toResponse() }
         return ResponseEntity.ok(result)
     }
 
