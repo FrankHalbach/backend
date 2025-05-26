@@ -13,9 +13,9 @@ class SwaggerConfig {
         return OpenAPI()
             .info(
                 Info()
-                    .title("Vfin API")
+                    .title("VFin API")
                     .version("0.0.1")
-                    .description("This is a Vfin API documented with Swagger.")
+                    .description("This is a VFin API documented with Swagger.")
             )
     }
 }

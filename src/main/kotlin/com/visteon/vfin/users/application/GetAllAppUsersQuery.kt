@@ -1,13 +1,13 @@
 package com.visteon.vfin.users.application
 
 import com.visteon.vfin.common.annotation.Query
-import com.visteon.vfin.users.domain.User
+import com.visteon.vfin.users.domain.AppUser
 
 @Query
 class GetAllUsersQueryHandler(
-    private val userRepository: UserRepository
+    private val userRepository: AppUserRepository
 ) {
-    fun handle(): List<User> {
+    fun handle(): List<AppUser> {
         return userRepository.getAll()
     }
 }

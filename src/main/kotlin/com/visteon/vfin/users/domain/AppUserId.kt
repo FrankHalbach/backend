@@ -4,7 +4,7 @@ import com.visteon.vfin.common.validation.assertMatchesRegex
 import com.visteon.vfin.common.validation.assertNotEmpty
 
 @JvmInline
-value class UserId private constructor(val value: String) {
+value class AppUserId private constructor(val value: String) {
     companion object {
         const val NAME = "UserId"
         const val REGEX_PATTERN = "^[a-zA-Z0-9]{1,16}$"
@@ -12,12 +12,12 @@ value class UserId private constructor(val value: String) {
 
         val REGEX = Regex(this.REGEX_PATTERN)
 
-        operator fun invoke(input: String): UserId {
+        operator fun invoke(input: String): AppUserId {
             val normalized = input.trim().lowercase()
                 .assertNotEmpty(NAME)
                 .assertMatchesRegex(REGEX, NAME)
 
-            return UserId(normalized)
+            return AppUserId(normalized)
         }
     }
     override fun toString() = value

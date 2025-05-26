@@ -2,14 +2,14 @@ package com.visteon.vfin.users.application
 
 import com.visteon.vfin.common.annotation.Command
 import com.visteon.vfin.common.types.NameField
-import com.visteon.vfin.users.domain.User
-import com.visteon.vfin.users.domain.UserId
+import com.visteon.vfin.users.domain.AppUser
+import com.visteon.vfin.users.domain.AppUserId
 import jakarta.validation.constraints.*
 
 data class CreateUserCommand(
 
     @field:NotBlank
-    @field:Pattern(regexp = UserId.REGEX_PATTERN, message = UserId.VALIDATION_MESSAGE)
+    @field:Pattern(regexp = AppUserId.REGEX_PATTERN, message = AppUserId.VALIDATION_MESSAGE)
     val userId: String,
 
     @field:NotBlank
@@ -27,10 +27,10 @@ data class CreateUserCommand(
 
 @Command
 class CreateUserCommandHandler(
-    private val userRepository: UserRepository
+    private val userRepository: AppUserRepository
 ) {
-    fun handle(command: CreateUserCommand): User {
-        val user = User.from(command.userId, command.firstName, command.lastName, command.email)
+    fun handle(command: CreateUserCommand): AppUser {
+        val user = AppUser.from(command.userId, command.firstName, command.lastName, command.email)
         return userRepository.create(user)
     }
 }

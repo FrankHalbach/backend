@@ -3,16 +3,18 @@ package com.visteon.vfin.users.ui
 import com.visteon.vfin.users.application.CreateUserCommand
 import com.visteon.vfin.users.application.CreateUserCommandHandler
 import com.visteon.vfin.users.application.GetAllUsersQueryHandler
+import com.visteon.vfin.users.application.GetAppUserByUserId
 import com.visteon.vfin.users.application.GetUserByUserIdQueryHandler
 import com.visteon.vfin.users.application.UpdateUserCommand
 import com.visteon.vfin.users.application.UpdateUserCommandHandler
+import com.visteon.vfin.users.domain.AppUserId
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/users")
-class UserController(
+class AppUserController(
     private val createUser: CreateUserCommandHandler,
     private val updateUser: UpdateUserCommandHandler,
     private val getUserByUserId: GetUserByUserIdQueryHandler,
@@ -36,13 +38,13 @@ class UserController(
 
     @GetMapping("/{userId}")
     fun getUser(@PathVariable userId: String): ResponseEntity<UserResponse> =
-        getUserByUserId.handle(userId)
+        getUserByUserId.handle(GetAppUserByUserId(AppUserId(userId)))
             ?. let { ResponseEntity.ok(it.toResponse()) }
             ?: ResponseEntity.notFound().build()
 
     @GetMapping
     fun getAllUsers(): ResponseEntity<List<UserResponse>> {
-        val result = getAllUsers.handle().map { user -> user.toResponse() }
+        val result = getAllUsers.handle().map { it.toResponse() }
         return ResponseEntity.ok(result)
     }
 

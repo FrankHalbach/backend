@@ -1,6 +1,6 @@
 package com.visteon.vfin.users.ui
 
-import com.visteon.vfin.users.domain.User
+import com.visteon.vfin.users.domain.AppUser
 
 data class UserResponse(
     val userId: String,
@@ -9,7 +9,7 @@ data class UserResponse(
     val email: String
 )
 
-fun User.toResponse(): UserResponse = UserResponse(
+fun AppUser.toResponse(): UserResponse = UserResponse(
     userId = this.userId.value,
     firstName = this.firstName.value,
     lastName = this.lastName.value,

@@ -2,20 +2,22 @@ package com.visteon.vfin.users.infrastructure
 
 import com.visteon.vfin.common.types.EmailAddress
 import com.visteon.vfin.common.types.NameField
-import com.visteon.vfin.users.domain.User
-import com.visteon.vfin.users.domain.UserId
+import com.visteon.vfin.users.domain.AppUser
+import com.visteon.vfin.users.domain.AppUserId
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Table
 
+@Table(name = "app_user")
 @Entity
 data class UserEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    val id: Int? = null,
 
     @Column(nullable = false, unique = true)
     val userId: String ="",
@@ -33,15 +35,15 @@ data class UserEntity(
 
 
 // Domain ↔ Entity
-fun UserEntity.toDomain(): User =
-    User(
-        userId = UserId(this.userId),
+fun UserEntity.toDomain(): AppUser =
+    AppUser(
+        userId = AppUserId(this.userId),
         firstName = NameField(this.firstName),
         lastName = NameField(this.lastName),
         email = EmailAddress(this.email)
     )
 
-fun User.toEntity(id:Long?): UserEntity =
+fun AppUser.toEntity(id:Int?): UserEntity =
     UserEntity(
         id = id, // Let DB auto-generate, or pass externally if needed
         userId = this.userId.value,
