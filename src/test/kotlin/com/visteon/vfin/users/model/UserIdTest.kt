@@ -1,4 +1,4 @@
-package com.visteon.vfin.users.domain
+package com.visteon.vfin.users.model
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.test.assertFailsWith

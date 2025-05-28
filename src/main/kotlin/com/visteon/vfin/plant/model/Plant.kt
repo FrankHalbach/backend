@@ -1,4 +1,4 @@
-package com.visteon.vfin.plant.domain
+package com.visteon.vfin.plant.model
 
 import com.visteon.vfin.common.types.NameField
 

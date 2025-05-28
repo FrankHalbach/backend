@@ -1,4 +1,4 @@
-package com.visteon.vfin.users.domain
+package com.visteon.vfin.users.model
 
 import com.visteon.vfin.common.types.NameField
 import com.visteon.vfin.common.types.EmailAddress
