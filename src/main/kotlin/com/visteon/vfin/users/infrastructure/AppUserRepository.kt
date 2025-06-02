@@ -31,12 +31,10 @@ class AppUserRepository(
     }
 
     fun update(updated: AppUser): AppUser {
-      val dbUsr = crudRepo.findByUserId(updated.userId.value)
-         ?: throw NoSuchElementException("User with ID ${updated.userId.value} not found")
-
-      val entity = updated.toEntity()
-
-      return crudRepo.save(entity).toDomain()
+        val dbUser = crudRepo.findById(updated.id.value).orElseThrow { NoSuchElementException("User with ID ${updated.userId.value} not found")}.toDomain()
+        val currentDomain = dbUser.updatedFrom(updated)
+        val entity = currentDomain.toEntity()
+        return crudRepo.save(entity).toDomain()
    }
 
     fun getAll(): List<AppUser> {

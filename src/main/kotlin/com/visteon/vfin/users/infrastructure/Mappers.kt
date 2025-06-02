@@ -24,3 +24,14 @@ fun AppUser.toEntity(): UserEntity =
         lastName = this.lastName.value,
         email = this.email.value
     )
+
+fun AppUser.updatedFrom(updated: AppUser): AppUser {
+    require(this.id == updated.id) { "Cannot update: ID mismatch" }
+
+    return this.copy(
+        userId = updated.userId,
+        firstName = updated.firstName,
+        lastName = updated.lastName,
+        email = updated.email
+    )
+}

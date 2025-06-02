@@ -1,7 +1,5 @@
 package com.visteon.vfin.users.model
 
-import java.util.UUID
-
 fun CreateAppUserRequest.toDomain(): AppUser =
     AppUser.new(
         userId = this.userId,

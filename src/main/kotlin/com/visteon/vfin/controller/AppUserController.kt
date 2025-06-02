@@ -32,12 +32,12 @@ class AppUserController(
         repo.getById(UserId.from(id))
             ?. let { ResponseEntity.ok(it.toResponse()) }
             ?: ResponseEntity.notFound().build()
-//
-//    @GetMapping("/by-user-id/{appUserId}")
-//    fun getByAppUserId(@PathVariable appUserId: String): ResponseEntity<UserResponse> =
-//        repo.getByAppUserId(AppUserId(appUserId))
-//            ?. let { ResponseEntity.ok(it.toResponse()) }
-//            ?: ResponseEntity.notFound().build()
+
+    @GetMapping("/by-user-id/{appUserId}")
+    fun getByAppUserId(@PathVariable appUserId: String): ResponseEntity<UserResponse> =
+        repo.getByAppUserId(AppUserId(appUserId))
+            ?. let { ResponseEntity.ok(it.toResponse()) }
+            ?: ResponseEntity.notFound().build()
 
     @GetMapping
     fun getAllUsers(): ResponseEntity<List<UserResponse>> {
