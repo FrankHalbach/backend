@@ -18,20 +18,26 @@ class AppUserController(
         return  ResponseEntity.ok(user.toResponse())
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping("/{id}")
     fun updateUser(
-        @PathVariable userId: String,
+        @PathVariable id: String,
         @Valid @RequestBody req: UpdateAppUserRequest
     ): ResponseEntity<UserResponse> {
-        val updated = repo.update( req.toDomain(userId))
+        val updated = repo.update( req.toDomain(id))
         return ResponseEntity.ok(updated.toResponse())
     }
 
-    @GetMapping("/{userId}")
-    fun getUser(@PathVariable userId: String): ResponseEntity<UserResponse> =
-        repo.getById(AppUserId(userId))
+    @GetMapping("/{id}")
+    fun getUserById(@PathVariable id: String): ResponseEntity<UserResponse> =
+        repo.getById(UserId.from(id))
             ?. let { ResponseEntity.ok(it.toResponse()) }
             ?: ResponseEntity.notFound().build()
+//
+//    @GetMapping("/by-user-id/{appUserId}")
+//    fun getByAppUserId(@PathVariable appUserId: String): ResponseEntity<UserResponse> =
+//        repo.getByAppUserId(AppUserId(appUserId))
+//            ?. let { ResponseEntity.ok(it.toResponse()) }
+//            ?: ResponseEntity.notFound().build()
 
     @GetMapping
     fun getAllUsers(): ResponseEntity<List<UserResponse>> {

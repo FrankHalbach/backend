@@ -22,3 +22,4 @@ value class AppUserId private constructor(val value: String) {
     }
     override fun toString() = value
 }
+

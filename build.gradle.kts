@@ -29,6 +29,9 @@ dependencies {
     implementation("com.oracle.database.jdbc:ojdbc11")
     // db migrations
 
+    //UUID
+    implementation("com.github.f4b6a3:uuid-creator:6.1.1")
+
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-database-oracle")
 

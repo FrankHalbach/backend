@@ -11,4 +11,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+  flyway:
+    clean-disabled: true
+    baseline-on-migrate: true
+
+
 

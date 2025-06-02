@@ -1,14 +1,15 @@
 package com.visteon.vfin.users.infrastructure
 
+import com.visteon.vfin.common.Ids
 import jakarta.persistence.*
+import java.util.UUID
 
-@Table(name = "app_user")
 @Entity
+@Table(name = "app_user")
 data class UserEntity(
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null,
+    val id: UUID = Ids.empty(),
 
     @Column(nullable = false, unique = true)
     val userId: String ="",
