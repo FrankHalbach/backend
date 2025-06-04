@@ -1,6 +1,7 @@
 package com.visteon.vfin.users.infrastructure
 
 import com.visteon.vfin.common.Ids
+import com.visteon.vfin.users.model.UserStatus
 import jakarta.persistence.*
 import java.util.UUID
 
@@ -12,7 +13,7 @@ data class UserEntity(
     val id: UUID = Ids.empty(),
 
     @Column(nullable = false, unique = true)
-    val userId: String ="",
+    val appUserId: String ="",
 
     @Column(nullable = false)
     val firstName: String ="",
@@ -21,7 +22,11 @@ data class UserEntity(
     val lastName: String ="",
 
     @Column(nullable = false, unique = true)
-    val email: String=""
+    val email: String="",
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    val userStatus: UserStatus  = UserStatus.ACTIVE
 )
 
 

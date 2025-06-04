@@ -1,13 +1,16 @@
-package com.visteon.vfin.plant.model
+package com.visteon.vfin.plant.application
+
+import com.visteon.vfin.plant.model.CreatePlant
+import com.visteon.vfin.plant.model.Plant
 
 fun CreatePlantRequest.toDomain(): CreatePlant =
-    CreatePlant.from(
+    CreatePlant.Companion.from(
         code = this.code,
         name = this.name
     )
 
 fun UpdatePlantRequest.toDomain(id: Int): Plant =
-    Plant.from(
+    Plant.Companion.from(
         plantId = id,
         code = this.code,
         name = this.name

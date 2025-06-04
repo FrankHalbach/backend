@@ -10,28 +10,32 @@ import com.visteon.vfin.users.model.UserId
 fun UserEntity.toDomain(): AppUser =
     AppUser(
         id = UserId(this.id),
-        userId = AppUserId(this.userId),
+        appUserId = AppUserId(this.appUserId),
         firstName = NameField(this.firstName),
         lastName = NameField(this.lastName),
-        email = EmailAddress(this.email)
+        email = EmailAddress(this.email),
+        userStatus = this.userStatus
     )
 
 fun AppUser.toEntity(): UserEntity =
     UserEntity(
         id = this.id.value,
-        userId = this.userId.value,
+        appUserId = this.appUserId.value,
         firstName = this.firstName.value,
         lastName = this.lastName.value,
-        email = this.email.value
+        email = this.email.value,
+        userStatus = this.userStatus
     )
 
 fun AppUser.updatedFrom(updated: AppUser): AppUser {
     require(this.id == updated.id) { "Cannot update: ID mismatch" }
 
     return this.copy(
-        userId = updated.userId,
+        appUserId = updated.appUserId,
         firstName = updated.firstName,
         lastName = updated.lastName,
-        email = updated.email
+        email = updated.email,
+        userStatus = this.userStatus
+
     )
 }

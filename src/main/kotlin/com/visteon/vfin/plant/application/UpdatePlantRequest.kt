@@ -1,9 +1,9 @@
-package com.visteon.vfin.plant.model
+package com.visteon.vfin.plant.application
 
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 
-data class CreatePlantRequest(
+data class UpdatePlantRequest(
 
     @field:NotBlank
     @field:Size(min = 1,max = 64)

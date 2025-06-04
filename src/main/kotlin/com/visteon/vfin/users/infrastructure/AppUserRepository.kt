@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 interface UserEntityRepository : CrudRepository<UserEntity, UUID> {
-   fun findByUserId(userId: String): UserEntity?
+   fun findByAppUserId(userId: String): UserEntity?
    //fun findByEmail(email: String): UserEntity?
 }
 
@@ -27,11 +27,11 @@ class AppUserRepository(
 
 
     fun getByAppUserId(userId: AppUserId): AppUser? {
-        return crudRepo.findByUserId(userId.value)?.toDomain()
+        return crudRepo.findByAppUserId(userId.value)?.toDomain()
     }
 
     fun update(updated: AppUser): AppUser {
-        val dbUser = crudRepo.findById(updated.id.value).orElseThrow { NoSuchElementException("User with ID ${updated.userId.value} not found")}.toDomain()
+        val dbUser = crudRepo.findById(updated.id.value).orElseThrow { NoSuchElementException("User with ID ${updated.appUserId.value} not found")}.toDomain()
         val currentDomain = dbUser.updatedFrom(updated)
         val entity = currentDomain.toEntity()
         return crudRepo.save(entity).toDomain()

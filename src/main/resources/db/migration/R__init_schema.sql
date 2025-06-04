@@ -1,9 +1,10 @@
 CREATE TABLE app_user (
      id RAW(16) PRIMARY KEY,
-     user_id VARCHAR2(255 CHAR) NOT NULL UNIQUE,
+     app_user_id VARCHAR2(255 CHAR) NOT NULL UNIQUE,
      first_name VARCHAR2(255 CHAR) NOT NULL,
      last_name VARCHAR2(255 CHAR) NOT NULL,
-     email VARCHAR2(255 CHAR) NOT NULL UNIQUE
+     email VARCHAR2(255 CHAR) NOT NULL UNIQUE,
+     user_status VARCHAR2(64 CHAR) NOT NULL
 );
 
 CREATE TABLE plant (
@@ -12,3 +13,11 @@ CREATE TABLE plant (
     name VARCHAR2(255 CHAR) NOT NULL
 );
 
+CREATE TABLE audit_log (
+   id            RAW(16) PRIMARY KEY,
+   user_id       RAW(16) NOT NULL,
+   request_type  VARCHAR2(255) NOT NULL,
+   request_body  CLOB,
+   timestamp     TIMESTAMP WITH TIME ZONE NOT NULL,
+   CONSTRAINT fk_audit_log_user FOREIGN KEY (user_id) REFERENCES app_user(id)
+);
