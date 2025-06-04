@@ -1,5 +1,6 @@
 package com.visteon.vfin.plant.infrastructure
 
+import com.visteon.vfin.common.types.NameField
 import com.visteon.vfin.plant.model.CreatePlant
 import com.visteon.vfin.plant.model.Plant
 import com.visteon.vfin.plant.model.PlantId
@@ -14,7 +15,13 @@ class PlantRepository(
 )  {
 
      fun create(plant: CreatePlant): Plant {
-        return crudRepo.save(PlantEntity(null, plant.code.value, plant.name.value)).toDomain()
+         val entity = PlantEntity(
+             null,
+             plant.code.value,
+             plant.name.value
+         )
+
+        return crudRepo.save(entity).toDomain()
     }
 
      fun getById(plantId: PlantId): Plant? {
@@ -24,10 +31,13 @@ class PlantRepository(
     }
 
      fun update(updated: Plant): Plant {
-        val plantInDb = crudRepo.findById(updated.plantId.value)
-            .orElseThrow { NoSuchElementException("Plant with ID ${updated.plantId.value} not found") }
 
-        val entity = updated.toEntity(plantInDb.id)
+        val entity =  PlantEntity(
+            id = updated.plantId.value,
+            code = updated.code.value,
+            name = updated.name.value
+        )
+
         return crudRepo.save(entity).toDomain()
     }
 
@@ -36,3 +46,11 @@ class PlantRepository(
     }
 
 }
+
+// Domain ↔ Entity
+fun PlantEntity.toDomain(): Plant =
+    Plant(
+        plantId = PlantId(this.id ?: 0),
+        code = NameField(this.code),
+        name = NameField(this.name)
+        )

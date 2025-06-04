@@ -1,6 +1,8 @@
 package com.visteon.vfin.plant.application
 
 import com.visteon.vfin.plant.infrastructure.PlantRepository
+import com.visteon.vfin.plant.model.CreatePlant
+import com.visteon.vfin.plant.model.Plant
 import com.visteon.vfin.plant.model.PlantId
 import org.springframework.stereotype.Service
 
@@ -10,12 +12,29 @@ class PlantService(
 ) {
 
     fun create(req: CreatePlantRequest): PlantResponse {
-        val plant = repository.create(req.toDomain())
+
+        val newPlant = CreatePlant.from(
+            code = req.code,
+            name = req.name
+        )
+        val plant = repository.create(newPlant)
         return plant.toResponse()
     }
 
     fun update(plantId: Int, req: UpdatePlantRequest): PlantResponse {
-        val updated = repository.update(req.toDomain(plantId))
+
+        val updatedRequest = Plant.from(
+            plantId = plantId,
+            code = req.code,
+            name = req.name
+        )
+
+        val plantInDb = repository.getById(PlantId(plantId)) ?: throw NoSuchElementException("Plant with ID $plantId not found")
+
+        val updatedPlant= plantInDb.updateFrom(updatedRequest)
+
+        val updated = repository.update(updatedPlant)
+
         return updated.toResponse()
     }
 
@@ -28,3 +47,9 @@ class PlantService(
         return repository.getAll().map { it.toResponse() }
     }
 }
+
+fun Plant.toResponse(): PlantResponse = PlantResponse(
+    id = this.plantId.value,
+    code = this.code.value,
+    name = this.name.value
+)

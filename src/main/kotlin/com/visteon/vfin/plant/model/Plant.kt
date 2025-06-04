@@ -7,6 +7,15 @@ data class Plant(
     val code: NameField,
     val name: NameField
 ) {
+    fun updateFrom(updated: Plant): Plant {
+        require(this.plantId == updated.plantId) { "Cannot update: Plant ID mismatch" }
+
+        return this.copy(
+            code = updated.code,
+            name = updated.name
+        )
+    }
+
     companion object {
         fun from(plantId:Int, code:String, name:String): Plant {
             return Plant(

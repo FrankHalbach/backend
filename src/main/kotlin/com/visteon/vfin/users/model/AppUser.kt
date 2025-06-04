@@ -11,6 +11,17 @@ data class AppUser(
     val email: EmailAddress,
     val userStatus: UserStatus,
 ) {
+    fun updatedFrom(updated: AppUser): AppUser {
+        require(this.id == updated.id) { "Cannot update: ID mismatch" }
+
+        return this.copy(
+            appUserId = updated.appUserId,
+            firstName = updated.firstName,
+            lastName = updated.lastName,
+            email = updated.email,
+            userStatus = this.userStatus // maybe you want to allow updates to this later?
+        )
+    }
     companion object {
         fun from(id: String, appUserId: String, firstName: String, lastName: String, email: String, userStatus: UserStatus): AppUser =
             AppUser(
