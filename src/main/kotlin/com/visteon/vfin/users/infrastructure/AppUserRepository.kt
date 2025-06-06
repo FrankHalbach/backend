@@ -1,15 +1,13 @@
 package com.visteon.vfin.users.infrastructure
 
 import com.visteon.vfin.common.types.EmailAddress
-import com.visteon.vfin.common.types.EmailAddress.Companion.invoke
 import com.visteon.vfin.common.types.NameField
-import com.visteon.vfin.common.types.NameField.Companion.invoke
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId
 import com.visteon.vfin.users.model.UserId
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
-import java.util.UUID
+import java.util.*
 
 interface UserEntityRepository : CrudRepository<UserEntity, UUID> {
    fun findByAppUserId(userId: String): UserEntity?

@@ -13,6 +13,12 @@ CREATE TABLE plant (
     name VARCHAR2(255 CHAR) NOT NULL
 );
 
+
+CREATE TABLE project (
+   id RAW(16) PRIMARY KEY,
+   name VARCHAR2(255 CHAR) NOT NULL
+);
+
 CREATE TABLE audit_log (
    id            RAW(16) PRIMARY KEY,
    user_id       RAW(16) NOT NULL,
