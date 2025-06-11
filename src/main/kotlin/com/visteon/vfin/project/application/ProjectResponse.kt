@@ -5,4 +5,4 @@ import java.util.UUID
 
 data class ProjectResponse(val id : UUID, val name : String)
 
-fun Project.toResponse(): ProjectResponse = ProjectResponse(this.id.value,this.name.value)
+fun Project.toResponse(): ProjectResponse = ProjectResponse(this.id.value,this.projectNumber.value)

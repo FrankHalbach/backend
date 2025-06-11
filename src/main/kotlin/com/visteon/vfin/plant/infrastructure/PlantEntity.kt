@@ -1,19 +1,19 @@
 package com.visteon.vfin.plant.infrastructure
 
-import jakarta.persistence.*
+import com.visteon.vfin.common.types.NameField
+import com.visteon.vfin.plant.model.Plant
+import org.jetbrains.exposed.v1.core.ResultRow
+import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
 
-@Table(name="plant")
-@Entity
-data class PlantEntity(
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null ,
+object PlantEntity : UUIDTable("PLANT") {
+ val code = varchar("CODE", NameField.MAX_LENGTH).uniqueIndex()
+ val name = varchar("NAME", NameField.MAX_LENGTH)
+}
 
-    @Column(nullable = false, unique = true)
-    val code: String = "",
 
-    @Column(nullable = false)
-    val name: String = ""
-
+fun ResultRow.toDomain(): Plant = Plant.from(
+    this[PlantEntity.id].value,
+    this[PlantEntity.code],
+    this[PlantEntity.name]
 )

@@ -1,59 +1,55 @@
 package com.visteon.vfin.users.infrastructure
 
-import com.visteon.vfin.common.types.EmailAddress
-import com.visteon.vfin.common.types.NameField
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId
 import com.visteon.vfin.users.model.UserId
-import org.springframework.data.repository.CrudRepository
+import org.jetbrains.exposed.v1.jdbc.insertAndGetId
+import org.jetbrains.exposed.v1.jdbc.selectAll
+import org.jetbrains.exposed.v1.jdbc.update
 import org.springframework.stereotype.Repository
-import java.util.*
 
-interface UserEntityRepository : CrudRepository<UserEntity, UUID> {
-   fun findByAppUserId(userId: String): UserEntity?
-   //fun findByEmail(email: String): UserEntity?
-}
 
 @Repository
-class AppUserRepository(
-   private val crudRepo: UserEntityRepository
-)  {
+class AppUserRepository {
 
-    fun save(user: AppUser): AppUser {
+    fun create(user: AppUser): UserId {
 
-        val entity =  UserEntity(
-            id = user.id.value,
-            appUserId = user.appUserId.value,
-            firstName = user.firstName.value,
-            lastName = user.lastName.value,
-            email = user.email.value,
-            userStatus = user.userStatus
-        )
+        val id = AppUserEntity.insertAndGetId {
+            it[id] = user.id.value
+            it[appUserId] = user.appUserId.value
+            it[firstName] = user.firstName.value
+            it[lastName] = user.lastName.value
+            it[email] = user.email.value
+            it[userStatus] = user.userStatus
+        }
 
-      return crudRepo.save(entity).toDomain()
+        return UserId(id.value)
    }
 
-    fun getById(userId: UserId): AppUser? {
-        return crudRepo.findById(userId.value).orElse(null)?.toDomain()
+    fun update(user: AppUser) {
+        AppUserEntity.update({ AppUserEntity.id eq user.id.value }) {
+            it[appUserId] = user.appUserId.value
+            it[firstName] = user.firstName.value
+            it[lastName] = user.lastName.value
+            it[email] = user.email.value
+            it[userStatus] = user.userStatus
+        }
     }
 
-    fun getByAppUserId(userId: AppUserId): AppUser? {
-        return crudRepo.findByAppUserId(userId.value)?.toDomain()
-    }
 
-    fun getAll(): List<AppUser> {
-      return crudRepo.findAll().map { it.toDomain() }
-   }
+    fun getById(userId: UserId): AppUser? = AppUserEntity
+        .selectAll()
+        .where { AppUserEntity.id eq userId.value }
+        .firstOrNull()
+        ?.toAppUser()
+
+    fun getByAppUserId(userId: AppUserId): AppUser? = AppUserEntity
+        .selectAll()
+        .where { AppUserEntity.appUserId eq userId.value }
+        .firstOrNull()
+        ?.toAppUser()
+
+    fun getAll(): List<AppUser> = AppUserEntity.selectAll().map { it.toAppUser() }
 
 }
 
-// Domain ↔ Entity
-fun UserEntity.toDomain(): AppUser =
-    AppUser(
-        id = UserId(this.id),
-        appUserId = AppUserId(this.appUserId),
-        firstName = NameField(this.firstName),
-        lastName = NameField(this.lastName),
-        email = EmailAddress(this.email),
-        userStatus = this.userStatus
-    )

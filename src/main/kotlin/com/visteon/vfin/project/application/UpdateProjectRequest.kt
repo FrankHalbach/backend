@@ -4,7 +4,7 @@ import com.visteon.vfin.common.types.NameField
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 
-data class CreateProjectRequest (
+data class UpdateProjectRequest (
 
     @NotBlank
     @Size(min = NameField.Companion.MIN_LENGTH,max = NameField.Companion.MAX_LENGTH)
@@ -14,4 +14,3 @@ data class CreateProjectRequest (
     @Size(min = NameField.Companion.MIN_LENGTH,max = NameField.Companion.MAX_LENGTH)
     val projectTitle: String,
 )
-

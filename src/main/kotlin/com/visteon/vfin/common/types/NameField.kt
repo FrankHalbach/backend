@@ -8,7 +8,7 @@ value class NameField private constructor(val value: String) {
     companion object {
         const val NAME = "NameField"
         const val MIN_LENGTH = 1
-        const val MAX_LENGTH = 50
+        const val MAX_LENGTH = 255
 
         operator fun invoke(input: String): NameField {
             val trimmed = input.trim()

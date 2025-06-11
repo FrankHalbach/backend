@@ -1,56 +1,43 @@
 package com.visteon.vfin.plant.infrastructure
 
-import com.visteon.vfin.common.types.NameField
-import com.visteon.vfin.plant.model.CreatePlant
 import com.visteon.vfin.plant.model.Plant
 import com.visteon.vfin.plant.model.PlantId
-import org.springframework.data.repository.CrudRepository
+import org.jetbrains.exposed.v1.jdbc.insertAndGetId
+import org.jetbrains.exposed.v1.jdbc.selectAll
+import org.jetbrains.exposed.v1.core.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.v1.jdbc.update
 import org.springframework.stereotype.Repository
 
-interface PlantEntityRepository : CrudRepository<PlantEntity, Int> {
-}
+
 @Repository
-class PlantRepository(
-    private val crudRepo: PlantEntityRepository
-)  {
+class PlantRepository
+{
 
-     fun create(plant: CreatePlant): Plant {
-         val entity = PlantEntity(
-             null,
-             plant.code.value,
-             plant.name.value
-         )
+    fun create(newPlant: Plant): PlantId {
 
-        return crudRepo.save(entity).toDomain()
+        val id = PlantEntity.insertAndGetId {
+            it[code] = newPlant.code.value
+            it[name] = newPlant.name.value
+        }
+
+        return PlantId(id.value)
+
     }
 
-     fun getById(plantId: PlantId): Plant? {
-        return crudRepo.findById(plantId.value)
-            .orElse(null)
-            ?.toDomain()
+    fun update(updated: Plant)  {
+
+        PlantEntity.update({ PlantEntity.id eq updated.plantId.value }) {
+            it[code] = updated.code.value
+            it[name] = updated.name.value
+        }
     }
 
-     fun update(updated: Plant): Plant {
+    fun getById(plantId: PlantId): Plant? = PlantEntity
+        .selectAll()
+        .where(PlantEntity.id eq plantId.value)
+        .firstOrNull()
+        ?.toDomain()
 
-        val entity =  PlantEntity(
-            id = updated.plantId.value,
-            code = updated.code.value,
-            name = updated.name.value
-        )
-
-        return crudRepo.save(entity).toDomain()
-    }
-
-    fun getAll(): List<Plant> {
-        return crudRepo.findAll().map { it.toDomain() }
-    }
+    fun getAll(): List<Plant> = PlantEntity.selectAll().map { it.toDomain() }
 
 }
-
-// Domain ↔ Entity
-fun PlantEntity.toDomain(): Plant =
-    Plant(
-        plantId = PlantId(this.id ?: 0),
-        code = NameField(this.code),
-        name = NameField(this.name)
-        )

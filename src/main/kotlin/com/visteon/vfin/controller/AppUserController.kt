@@ -4,6 +4,7 @@ import com.visteon.vfin.users.application.AppUserService
 import com.visteon.vfin.users.application.CreateAppUserRequest
 import com.visteon.vfin.users.application.UpdateAppUserRequest
 import com.visteon.vfin.users.application.UserResponse
+import com.visteon.vfin.users.model.UserId
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -15,7 +16,7 @@ class AppUserController(
 ) {
 
     @PostMapping
-    fun createUser(@Valid @RequestBody req: CreateAppUserRequest): ResponseEntity<UserResponse> {
+    fun createUser(@Valid @RequestBody req: CreateAppUserRequest): ResponseEntity<UserId> {
         val user = service.create(req)
         return  ResponseEntity.ok(user)
     }
@@ -24,9 +25,9 @@ class AppUserController(
     fun updateUser(
         @PathVariable id: String,
         @Valid @RequestBody req: UpdateAppUserRequest
-    ): ResponseEntity<UserResponse> {
+    ): ResponseEntity<Unit> {
         val updated = service.update(id,req)
-        return ResponseEntity.ok(updated)
+        return ResponseEntity.ok().build()
     }
 
     @GetMapping("/{id}")

@@ -5,11 +5,13 @@ import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId
 import com.visteon.vfin.users.model.UserId
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
+@Transactional
 @Service
 class AppUserService(private val repo: AppUserRepository) {
 
-    fun create(req: CreateAppUserRequest): UserResponse {
+    fun create(req: CreateAppUserRequest): UserId {
 
         val newUser = AppUser.new(
             appUserId = req.appUserId,
@@ -18,10 +20,10 @@ class AppUserService(private val repo: AppUserRepository) {
             email = req.email
         )
 
-        return repo.save(newUser).toResponse()
+        return repo.create(newUser)
     }
 
-    fun update(id: String, req: UpdateAppUserRequest): UserResponse {
+    fun update(id: String, req: UpdateAppUserRequest) {
 
         val updateRequest = AppUser.from(
             id = id,
@@ -36,7 +38,7 @@ class AppUserService(private val repo: AppUserRepository) {
 
         val updated = existing.updatedFrom(updateRequest)
 
-        return repo.save(updated).toResponse()
+        return repo.update(updated)
     }
 
     fun getById(id: String): UserResponse? =

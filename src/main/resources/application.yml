@@ -2,18 +2,21 @@ spring:
   application:
     name: backend
   datasource:
+    #url: jdbc:mysql://localhost:3306/vfin
+    #username: root
+    #password: root
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+#    url:jdbc:h2:mem:testdb
+#    driverClassName:org.h2.Driver
+#    username:sa
+#    password:password
     url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
     username: vfin_usr
     password: root
-  sql:
-    init:
-      mode: always      # always run schema/data.sql (optional, default is 'embedded')
-  jpa:
-    hibernate:
-      ddl-auto: validate
   flyway:
     clean-disabled: true
     baseline-on-migrate: true
+    create-schemas: true
 
 
 

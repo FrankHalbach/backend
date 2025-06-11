@@ -1,27 +1,29 @@
 package com.visteon.vfin.plant.application
 
 import com.visteon.vfin.plant.infrastructure.PlantRepository
-import com.visteon.vfin.plant.model.CreatePlant
 import com.visteon.vfin.plant.model.Plant
 import com.visteon.vfin.plant.model.PlantId
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
+
+@Transactional
 @Service
 class PlantService(
-    private val repository: PlantRepository
+    val repository: PlantRepository
 ) {
 
-    fun create(req: CreatePlantRequest): PlantResponse {
+    fun create(req: CreatePlantRequest): PlantId {
 
-        val newPlant = CreatePlant.from(
+        val newPlant = Plant.new(
             code = req.code,
             name = req.name
         )
-        val plant = repository.create(newPlant)
-        return plant.toResponse()
+        return  repository.create(newPlant)
     }
 
-    fun update(plantId: Int, req: UpdatePlantRequest): PlantResponse {
+    fun update(plantId: UUID, req: UpdatePlantRequest) {
 
         val updatedRequest = Plant.from(
             plantId = plantId,
@@ -29,27 +31,17 @@ class PlantService(
             name = req.name
         )
 
-        val plantInDb = repository.getById(PlantId(plantId)) ?: throw NoSuchElementException("Plant with ID $plantId not found")
-
-        val updatedPlant= plantInDb.updateFrom(updatedRequest)
-
-        val updated = repository.update(updatedPlant)
-
-        return updated.toResponse()
-    }
-
-    fun getById(plantId: Int): PlantResponse? {
-        return repository.getById(PlantId(plantId))?.toResponse()
+        repository.update(updatedRequest)
 
     }
 
-    fun getAll(): List<PlantResponse> {
-        return repository.getAll().map { it.toResponse() }
-    }
+    fun getById(plantId: UUID): PlantResponse? = repository.getById(PlantId(plantId))?.toResponse()
+
+    fun getAll(): List<PlantResponse> =repository.getAll().map { it.toResponse() }
 }
 
 fun Plant.toResponse(): PlantResponse = PlantResponse(
-    id = this.plantId.value,
+    id = this.plantId.value.toString(),
     code = this.code.value,
     name = this.name.value
 )
