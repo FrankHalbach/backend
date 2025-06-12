@@ -6,6 +6,3 @@ data class PlantResponse(
     val name: String,
 )
 
-data class PlantCreatedResponse(
-    val id: String
-)

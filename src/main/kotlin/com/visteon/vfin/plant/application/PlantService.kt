@@ -1,11 +1,12 @@
 package com.visteon.vfin.plant.application
 
+import com.visteon.vfin.common.exception.DuplicateEntityException
+import com.visteon.vfin.common.exception.EntityNotFoundException
 import com.visteon.vfin.plant.infrastructure.PlantRepository
 import com.visteon.vfin.plant.model.Plant
 import com.visteon.vfin.plant.model.PlantId
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.*
 
 
 @Transactional
@@ -13,8 +14,10 @@ import java.util.*
 class PlantService(
     val repository: PlantRepository
 ) {
+    fun create(req: PlantCreationRequest): PlantId {
 
-    fun create(req: CreatePlantRequest): PlantId {
+        if(repository.plantCodeExists(req.code))
+            throw DuplicateEntityException("Plant","Code", req.code)
 
         val newPlant = Plant.new(
             code = req.code,
@@ -23,19 +26,18 @@ class PlantService(
         return  repository.create(newPlant)
     }
 
-    fun update(plantId: UUID, req: UpdatePlantRequest) {
+    fun update(plantId: PlantId, req: PlantUpdateRequest) {
 
-        val updatedRequest = Plant.from(
-            plantId = plantId,
-            code = req.code,
-            name = req.name
-        )
+        val current = repository.getById(plantId) ?: throw EntityNotFoundException("Plant",plantId.value.toString())
 
-        repository.update(updatedRequest)
+        if(repository.plantCodeExistsOnOtherPlants(plantId,req.code))
+            throw DuplicateEntityException("Plant","Code", req.code)
 
+        val updatedPlant = current.update(req.name,req.code)
+        repository.update(updatedPlant)
     }
 
-    fun getById(plantId: UUID): PlantResponse? = repository.getById(PlantId(plantId))?.toResponse()
+    fun getById(plantId: PlantId): PlantResponse? = repository.getById(plantId)?.toResponse()
 
     fun getAll(): List<PlantResponse> =repository.getAll().map { it.toResponse() }
 }

@@ -13,7 +13,7 @@ object AppUserEntity : UUIDTable("APP_USER") {
     val appUserId = varchar("APP_USER_ID", 16).uniqueIndex()
     val firstName = varchar("FIRST_NAME", NameField.MAX_LENGTH)
     val lastName = varchar("LAST_NAME", NameField.MAX_LENGTH)
-    val email = varchar("EMAIL", EmailAddress.MAX_LENGTH)
+    val email = varchar("EMAIL", EmailAddress.MAX_LENGTH).uniqueIndex()
     val userStatus = enumerationByName("USER_STATUS",64, UserStatus::class)
 }
 

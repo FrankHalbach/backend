@@ -3,6 +3,7 @@ package com.visteon.vfin.users.infrastructure
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId
 import com.visteon.vfin.users.model.UserId
+import org.jetbrains.exposed.v1.core.and
 import org.jetbrains.exposed.v1.jdbc.insertAndGetId
 import org.jetbrains.exposed.v1.jdbc.selectAll
 import org.jetbrains.exposed.v1.jdbc.update
@@ -35,7 +36,26 @@ class AppUserRepository {
             it[userStatus] = user.userStatus
         }
     }
+    fun appUserIdExists(appUserId: AppUserId): Boolean = AppUserEntity
+        .selectAll()
+        .where { AppUserEntity.appUserId eq appUserId.value }
+        .limit(1)
+        .empty()
+        .not()
 
+    fun appUserIdExistsOnOtherUser(userId: UserId, appUserId: AppUserId): Boolean = AppUserEntity
+        .selectAll()
+        .where {(AppUserEntity.appUserId eq appUserId.value) and (AppUserEntity.id neq userId.value)}
+        .limit(1)
+        .empty()
+        .not()
+
+    fun emailAddressExists(email: String):Boolean = AppUserEntity
+        .selectAll()
+        .where { AppUserEntity.email eq email }
+        .limit(1)
+        .empty()
+        .not()
 
     fun getById(userId: UserId): AppUser? = AppUserEntity
         .selectAll()

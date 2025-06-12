@@ -5,6 +5,8 @@ import com.visteon.vfin.plant.model.PlantId
 import org.jetbrains.exposed.v1.jdbc.insertAndGetId
 import org.jetbrains.exposed.v1.jdbc.selectAll
 import org.jetbrains.exposed.v1.core.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.v1.core.and
+import org.jetbrains.exposed.v1.jdbc.select
 import org.jetbrains.exposed.v1.jdbc.update
 import org.springframework.stereotype.Repository
 
@@ -31,6 +33,20 @@ class PlantRepository
             it[name] = updated.name.value
         }
     }
+
+    fun plantCodeExists(code: String): Boolean = PlantEntity
+        .selectAll()
+        .where { PlantEntity.code eq code }
+        .limit(1)
+        .empty()
+        .not()
+
+    fun plantCodeExistsOnOtherPlants(plantId: PlantId, code: String): Boolean = PlantEntity
+        .selectAll()
+        .where { (PlantEntity.code eq code) and (PlantEntity.id neq plantId.value) }
+        .limit(1)
+        .empty()
+        .not()
 
     fun getById(plantId: PlantId): Plant? = PlantEntity
         .selectAll()

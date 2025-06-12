@@ -11,35 +11,34 @@ data class AppUser(
     val email: EmailAddress,
     val userStatus: UserStatus,
 ) {
-    fun updatedFrom(updated: AppUser): AppUser {
-        require(this.id == updated.id) { "Cannot update: ID mismatch" }
-
-        return this.copy(
-            appUserId = updated.appUserId,
-            firstName = updated.firstName,
-            lastName = updated.lastName,
-            email = updated.email,
-            userStatus = this.userStatus // maybe you want to allow updates to this later?
+    fun update(appUserId: String, firstName: String, lastName: String, email: String, userStatus: UserStatus): AppUser =
+        this.copy(
+            appUserId = AppUserId(appUserId),
+            firstName = NameField(firstName),
+            lastName = NameField(lastName),
+            email = EmailAddress(email),
+            userStatus = userStatus
         )
-    }
+
+
     companion object {
         fun from(id: String, appUserId: String, firstName: String, lastName: String, email: String, userStatus: UserStatus): AppUser =
             AppUser(
                 id = UserId.from(id),
-                appUserId = AppUserId.Companion(appUserId),
-                firstName = NameField.Companion(firstName),
-                lastName = NameField.Companion(lastName),
-                email = EmailAddress.Companion(email),
+                appUserId = AppUserId(appUserId),
+                firstName = NameField(firstName),
+                lastName = NameField(lastName),
+                email = EmailAddress(email),
                 userStatus = userStatus,
             )
 
         fun new(appUserId: String, firstName: String, lastName: String, email: String): AppUser =
             AppUser(
                 id = UserId.new(),
-                appUserId = AppUserId.Companion(appUserId),
-                firstName = NameField.Companion(firstName),
-                lastName = NameField.Companion(lastName),
-                email = EmailAddress.Companion(email),
+                appUserId = AppUserId(appUserId),
+                firstName = NameField(firstName),
+                lastName = NameField(lastName),
+                email = EmailAddress(email),
                 userStatus = UserStatus.ACTIVE
             )
     }

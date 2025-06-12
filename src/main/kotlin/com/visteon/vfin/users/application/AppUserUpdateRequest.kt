@@ -8,22 +8,22 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
 
-data class UpdateAppUserRequest(
+data class AppUserUpdateRequest(
 
-    @NotBlank
-    @Pattern(regexp = AppUserId.Companion.REGEX_PATTERN, message = AppUserId.Companion.VALIDATION_MESSAGE)
+    @field:NotBlank
+    @field:Pattern(regexp = AppUserId.Companion.REGEX_PATTERN, message = AppUserId.Companion.VALIDATION_MESSAGE)
     val appUserId: String,
 
-    @NotBlank
-    @Size(min = NameField.Companion.MIN_LENGTH,max = NameField.Companion.MAX_LENGTH)
+    @field:NotBlank
+    @field:Size(min = NameField.Companion.MIN_LENGTH,max = NameField.Companion.MAX_LENGTH)
     val firstName: String,
 
-    @NotBlank
-    @Size(min = NameField.Companion.MIN_LENGTH,max = NameField.Companion.MAX_LENGTH)
+    @field:NotBlank
+    @field:Size(min = NameField.Companion.MIN_LENGTH,max = NameField.Companion.MAX_LENGTH)
     val lastName: String,
 
-    @NotBlank
-    @Email
+    @field:NotBlank
+    @field:Email
     val email: String,
 
     val userStatus: UserStatus

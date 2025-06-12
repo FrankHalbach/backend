@@ -1,10 +1,11 @@
 package com.visteon.vfin.controller
 
-import com.visteon.vfin.plant.application.CreatePlantRequest
-import com.visteon.vfin.plant.application.PlantCreatedResponse
+import com.visteon.vfin.plant.application.PlantCreationRequest
+import com.visteon.vfin.plant.application.PlantCreationResponse
 import com.visteon.vfin.plant.application.PlantResponse
 import com.visteon.vfin.plant.application.PlantService
-import com.visteon.vfin.plant.application.UpdatePlantRequest
+import com.visteon.vfin.plant.application.PlantUpdateRequest
+import com.visteon.vfin.plant.model.PlantId
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -17,24 +18,23 @@ class PlantController(
 ) {
 
     @PostMapping
-    fun createPlant(@Valid @RequestBody req: CreatePlantRequest): ResponseEntity<PlantCreatedResponse> {
-
+    fun createPlant(@Valid @RequestBody req: PlantCreationRequest): ResponseEntity<PlantCreationResponse> {
         val id = service.create(req)
-        return  ResponseEntity.ok(PlantCreatedResponse(id.value.toString()))
+        return  ResponseEntity.ok(PlantCreationResponse(id.value.toString()))
     }
 
-    @PutMapping("/{plantId}")
+    @PutMapping("/{id}")
     fun updatePlant(
-        @PathVariable plantId: UUID,
-        @Valid @RequestBody req: UpdatePlantRequest
+        @PathVariable id: UUID,
+        @Valid @RequestBody req: PlantUpdateRequest
     ): ResponseEntity<Unit> {
-        service.update(plantId, req)
+        service.update(PlantId(id), req)
         return ResponseEntity.ok().build()
     }
 
-    @GetMapping("/{plantId}")
-    fun getPlant(@PathVariable plantId: UUID): ResponseEntity<PlantResponse> =
-        service.getById(plantId)
+    @GetMapping("/{id}")
+    fun getPlant(@PathVariable id: UUID): ResponseEntity<PlantResponse> =
+        service.getById(PlantId(id))
             ?. let { ResponseEntity.ok(it) }
             ?: ResponseEntity.notFound().build()
 
