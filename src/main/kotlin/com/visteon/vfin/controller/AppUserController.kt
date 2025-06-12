@@ -28,7 +28,7 @@ class AppUserController(
         @PathVariable id: UUID,
         @Valid @RequestBody req: AppUserUpdateRequest
     ): ResponseEntity<Unit> {
-        val updated = service.update(UserId(id),req)
+        service.update(UserId(id),req)
         return ResponseEntity.ok().build()
     }
 

@@ -2,11 +2,10 @@ package com.visteon.vfin.plant.infrastructure
 
 import com.visteon.vfin.plant.model.Plant
 import com.visteon.vfin.plant.model.PlantId
-import org.jetbrains.exposed.v1.jdbc.insertAndGetId
-import org.jetbrains.exposed.v1.jdbc.selectAll
 import org.jetbrains.exposed.v1.core.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.v1.core.and
-import org.jetbrains.exposed.v1.jdbc.select
+import org.jetbrains.exposed.v1.jdbc.insertAndGetId
+import org.jetbrains.exposed.v1.jdbc.selectAll
 import org.jetbrains.exposed.v1.jdbc.update
 import org.springframework.stereotype.Repository
 

@@ -37,8 +37,7 @@ class ProjectController(
         @PathVariable id: UUID,
         @Valid @RequestBody req: ProjectUpdateRequest
     ): ResponseEntity<Unit> {
-
-        val updated = service.update(ProjectId(id), req)
+        service.update(ProjectId(id), req)
         return ResponseEntity.ok().build()
     }
 
