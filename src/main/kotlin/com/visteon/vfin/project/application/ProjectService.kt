@@ -31,7 +31,7 @@ class ProjectService(
         if(repo.projectNumberExistsForOtherProjects(projectId, request.projectNumber))
             throw DuplicateEntityException("Project","Project Number", request.projectNumber)
 
-        val updated = current.update(request.projectNumber,request.projectTitle)
+        val updated = current.update(request.projectNumber,request.projectTitle, request.projectStatus)
 
         repo.update(updated)
 

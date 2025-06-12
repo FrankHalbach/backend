@@ -18,6 +18,7 @@ class ProjectRepository {
             it[id] = request.id.value
             it[projectNumber] = request.projectNumber.value
             it[projectTitle] = request.projectTitle.value
+            it[projectStatus] = request.projectStatus
         }
 
 
@@ -25,6 +26,7 @@ class ProjectRepository {
         .update({ ProjectEntity.id eq request.id.value }) {
             it[projectNumber] = request.projectNumber.value
             it[projectTitle] = request.projectTitle.value
+            it[projectStatus] = request.projectStatus
         }
 
     fun projectNumberExists(projectNumber: String): Boolean = ProjectEntity
