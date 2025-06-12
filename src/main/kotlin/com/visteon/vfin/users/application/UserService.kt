@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class AppUserService(private val repo: AppUserRepository) {
 
-    fun create(req: AppUserCreationRequest): UserId {
+    fun create(req: AppUserCreationRequest): AppUser {
 
         if(repo.appUserIdExists(AppUserId(req.appUserId))){
             throw DuplicateEntityException("User","Id", req.appUserId)
@@ -30,10 +30,14 @@ class AppUserService(private val repo: AppUserRepository) {
             email = req.email
         )
 
-        return repo.create(newUser)
+        repo.create(newUser)
+
+        return newUser
+
+
     }
 
-    fun update(userId: UserId, req: AppUserUpdateRequest) {
+    fun update(userId: UserId, req: AppUserUpdateRequest): AppUser {
 
         val existing = repo.getById(userId) ?: throw EntityNotFoundException("User", userId.value.toString())
 
@@ -48,17 +52,17 @@ class AppUserService(private val repo: AppUserRepository) {
             userStatus = req.userStatus
         )
 
-        return repo.update(updatedUser)
+        repo.update(updatedUser)
+
+        return updatedUser
     }
 
-    fun getById(userId: UserId): UserResponse? =
-        repo.getById(userId)?.toResponse()
+    fun getById(userId: UserId): AppUser? = repo.getById(userId)
 
-    fun getByAppUserId(appUserId: String): UserResponse? =
-        repo.getByAppUserId(AppUserId(appUserId))?.toResponse()
+    fun getByAppUserId(appUserId: String): AppUser? =
+        repo.getByAppUserId(AppUserId(appUserId))
 
-    fun getAll(): List<UserResponse> =
-        repo.getAll().map { it.toResponse() }
+    fun getAll(): List<AppUser> = repo.getAll()
 }
 
 fun AppUser.toResponse(): UserResponse = UserResponse(

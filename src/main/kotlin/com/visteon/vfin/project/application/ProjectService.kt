@@ -13,16 +13,18 @@ import org.springframework.transaction.annotation.Transactional
 class ProjectService(
     private val repo: ProjectRepository
 ) {
-    fun create(request: ProjectCreationRequest): ProjectCreationResponse {
+    fun create(request: ProjectCreationRequest): Project {
 
         if(repo.projectNumberExists(request.projectNumber))
             throw DuplicateEntityException("Project", "Project Number", request.projectNumber)
 
         val newProject = Project.new(request.projectNumber,request.projectTitle)
-        val id = repo.create(newProject)
-        return ProjectCreationResponse(id.value.toString())
+
+        repo.create(newProject)
+
+        return newProject
     }
-    fun update(projectId: ProjectId, request: ProjectUpdateRequest) {
+    fun update(projectId: ProjectId, request: ProjectUpdateRequest): Project {
 
         val current = repo.getById(projectId) ?: throw EntityNotFoundException("Project",projectId.value.toString())
 
@@ -30,7 +32,10 @@ class ProjectService(
             throw DuplicateEntityException("Project","Project Number", request.projectNumber)
 
         val updated = current.update(request.projectNumber,request.projectTitle)
+
         repo.update(updated)
+
+        return updated
     }
 
     fun getAll():List<Project> = repo.getAll()

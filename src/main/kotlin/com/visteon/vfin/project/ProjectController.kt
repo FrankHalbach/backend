@@ -1,7 +1,6 @@
-package com.visteon.vfin.controller
+package com.visteon.vfin.project
 
 import com.visteon.vfin.project.application.ProjectCreationRequest
-import com.visteon.vfin.project.application.ProjectCreationResponse
 import com.visteon.vfin.project.application.ProjectResponse
 import com.visteon.vfin.project.application.ProjectService
 import com.visteon.vfin.project.application.ProjectUpdateRequest
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
-
 @RestController
 @RequestMapping("/api/projects")
 class ProjectController(
@@ -27,19 +25,18 @@ class ProjectController(
 
 
     @PostMapping
-    fun createProject(@Valid @RequestBody req: ProjectCreationRequest): ResponseEntity<ProjectCreationResponse> {
-        val response = service.create(req)
-        return  ResponseEntity.ok(response)
-    }
+    fun createProject(@Valid @RequestBody req: ProjectCreationRequest): ResponseEntity<ProjectResponse> =
+        ResponseEntity.ok(service.create(req).toResponse())
+
 
     @PutMapping("/{id}")
     fun updateProject(
         @PathVariable id: UUID,
         @Valid @RequestBody req: ProjectUpdateRequest
-    ): ResponseEntity<Unit> {
-        service.update(ProjectId(id), req)
-        return ResponseEntity.ok().build()
-    }
+    ): ResponseEntity<ProjectResponse> =
+        ResponseEntity.ok(service.update(ProjectId(id), req).toResponse())
+
+
 
     @GetMapping("/{id}")
     fun getProject(@PathVariable id: UUID): ResponseEntity<ProjectResponse> =

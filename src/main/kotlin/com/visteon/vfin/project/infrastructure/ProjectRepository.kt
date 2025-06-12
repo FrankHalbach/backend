@@ -5,7 +5,7 @@ import com.visteon.vfin.project.model.Project
 import com.visteon.vfin.project.model.ProjectId
 import org.jetbrains.exposed.v1.core.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.v1.core.and
-import org.jetbrains.exposed.v1.jdbc.insertAndGetId
+import org.jetbrains.exposed.v1.jdbc.insert
 import org.jetbrains.exposed.v1.jdbc.selectAll
 import org.jetbrains.exposed.v1.jdbc.update
 import org.springframework.stereotype.Repository
@@ -13,24 +13,19 @@ import org.springframework.stereotype.Repository
 @Repository
 class ProjectRepository {
 
-    fun create(request: Project): ProjectId {
-
-
-        val id = ProjectEntity.insertAndGetId {
+    fun create(request: Project) = ProjectEntity
+        .insert {
+            it[id] = request.id.value
             it[projectNumber] = request.projectNumber.value
             it[projectTitle] = request.projectTitle.value
         }
-        return ProjectId(id.value)
 
-    }
 
-    fun update(request: Project)  {
-
-        ProjectEntity.update({ ProjectEntity.id eq request.id.value }) {
+    fun update(request: Project) = ProjectEntity
+        .update({ ProjectEntity.id eq request.id.value }) {
             it[projectNumber] = request.projectNumber.value
             it[projectTitle] = request.projectTitle.value
         }
-    }
 
     fun projectNumberExists(projectNumber: String): Boolean = ProjectEntity
         .selectAll()

@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 class PlantService(
     val repository: PlantRepository
 ) {
-    fun create(req: PlantCreationRequest): PlantId {
+    fun create(req: PlantCreationRequest): Plant {
 
         if(repository.plantCodeExists(req.code))
             throw DuplicateEntityException("Plant","Code", req.code)
@@ -23,10 +23,13 @@ class PlantService(
             code = req.code,
             name = req.name
         )
-        return  repository.create(newPlant)
+
+        repository.create(newPlant)
+
+        return newPlant
     }
 
-    fun update(plantId: PlantId, req: PlantUpdateRequest) {
+    fun update(plantId: PlantId, req: PlantUpdateRequest): Plant {
 
         val current = repository.getById(plantId) ?: throw EntityNotFoundException("Plant",plantId.value.toString())
 
@@ -34,16 +37,14 @@ class PlantService(
             throw DuplicateEntityException("Plant","Code", req.code)
 
         val updatedPlant = current.update(req.name,req.code)
+
         repository.update(updatedPlant)
+
+        return updatedPlant
     }
 
-    fun getById(plantId: PlantId): PlantResponse? = repository.getById(plantId)?.toResponse()
+    fun getById(plantId: PlantId): Plant? = repository.getById(plantId)
 
-    fun getAll(): List<PlantResponse> =repository.getAll().map { it.toResponse() }
+    fun getAll(): List<Plant> =repository.getAll()
 }
 
-fun Plant.toResponse(): PlantResponse = PlantResponse(
-    id = this.plantId.value.toString(),
-    code = this.code.value,
-    name = this.name.value
-)

@@ -4,7 +4,7 @@ import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId
 import com.visteon.vfin.users.model.UserId
 import org.jetbrains.exposed.v1.core.and
-import org.jetbrains.exposed.v1.jdbc.insertAndGetId
+import org.jetbrains.exposed.v1.jdbc.insert
 import org.jetbrains.exposed.v1.jdbc.selectAll
 import org.jetbrains.exposed.v1.jdbc.update
 import org.springframework.stereotype.Repository
@@ -13,9 +13,8 @@ import org.springframework.stereotype.Repository
 @Repository
 class AppUserRepository {
 
-    fun create(user: AppUser): UserId {
-
-        val id = AppUserEntity.insertAndGetId {
+    fun create(user: AppUser) = AppUserEntity
+        .insert {
             it[id] = user.id.value
             it[appUserId] = user.appUserId.value
             it[firstName] = user.firstName.value
@@ -24,18 +23,15 @@ class AppUserRepository {
             it[userStatus] = user.userStatus
         }
 
-        return UserId(id.value)
-   }
-
-    fun update(user: AppUser) {
-        AppUserEntity.update({ AppUserEntity.id eq user.id.value }) {
+    fun update(user: AppUser) = AppUserEntity
+        .update({ AppUserEntity.id eq user.id.value }) {
             it[appUserId] = user.appUserId.value
             it[firstName] = user.firstName.value
             it[lastName] = user.lastName.value
             it[email] = user.email.value
             it[userStatus] = user.userStatus
         }
-    }
+
     fun appUserIdExists(appUserId: AppUserId): Boolean = AppUserEntity
         .selectAll()
         .where { AppUserEntity.appUserId eq appUserId.value }
