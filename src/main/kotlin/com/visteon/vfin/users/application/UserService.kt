@@ -64,12 +64,3 @@ class AppUserService(private val repo: AppUserRepository) {
 
     fun getAll(): List<AppUser> = repo.getAll()
 }
-
-fun AppUser.toResponse(): UserResponse = UserResponse(
-    id = this.id.value.toString(),
-    appUserId = this.appUserId.value,
-    firstName = this.firstName.value,
-    lastName = this.lastName.value,
-    email = this.email.value,
-    userStatus = this.userStatus
-)
