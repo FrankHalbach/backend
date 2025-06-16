@@ -8,7 +8,7 @@ data class ProjectResponse(
     val id : UUID,
     val projectNumber : String,
     val projectTitle : String,
-    val status : ProjectStatus,
+    val projectStatus : ProjectStatus,
 )
 
 fun Project.toResponse(): ProjectResponse = ProjectResponse(

@@ -1,7 +1,7 @@
 package com.visteon.vfin.plant.model
 
 import com.visteon.vfin.common.Ids
-import com.visteon.vfin.common.types.NameField
+import com.visteon.vfin.types.NameField
 import java.util.UUID
 
 data class Plant(

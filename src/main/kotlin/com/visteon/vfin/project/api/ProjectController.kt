@@ -1,8 +1,8 @@
-package com.visteon.vfin.project
+package com.visteon.vfin.project.api
 
+import com.visteon.vfin.project.application.ProjectService
 import com.visteon.vfin.project.application.ProjectCreationRequest
 import com.visteon.vfin.project.application.ProjectResponse
-import com.visteon.vfin.project.application.ProjectService
 import com.visteon.vfin.project.application.ProjectUpdateRequest
 import com.visteon.vfin.project.application.toResponse
 import com.visteon.vfin.project.model.ProjectId

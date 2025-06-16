@@ -1,7 +1,7 @@
-package com.visteon.vfin.common.types
+package com.visteon.vfin.types
 
-import com.visteon.vfin.common.validation.assertNotEmpty
-import com.visteon.vfin.common.validation.assertLength
+import com.visteon.vfin.validation.assertNotEmpty
+import com.visteon.vfin.validation.assertLength
 
 @JvmInline
 value class NameField private constructor(val value: String) {

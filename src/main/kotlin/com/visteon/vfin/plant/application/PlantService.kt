@@ -1,7 +1,7 @@
 package com.visteon.vfin.plant.application
 
-import com.visteon.vfin.common.exception.DuplicateEntityException
-import com.visteon.vfin.common.exception.EntityNotFoundException
+import com.visteon.vfin.exception.DuplicateEntityException
+import com.visteon.vfin.exception.EntityNotFoundException
 import com.visteon.vfin.plant.infrastructure.PlantRepository
 import com.visteon.vfin.plant.model.Plant
 import com.visteon.vfin.plant.model.PlantId

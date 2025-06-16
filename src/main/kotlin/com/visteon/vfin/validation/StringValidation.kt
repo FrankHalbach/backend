@@ -1,4 +1,4 @@
-package com.visteon.vfin.common.validation
+package com.visteon.vfin.validation
 
 
 fun String.assertNotEmpty(fieldName: String = "String"): String {

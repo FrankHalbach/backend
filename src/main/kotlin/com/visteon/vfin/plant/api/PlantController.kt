@@ -1,4 +1,4 @@
-package com.visteon.vfin.plant
+package com.visteon.vfin.plant.api
 
 import com.visteon.vfin.plant.application.PlantCreationRequest
 import com.visteon.vfin.plant.application.PlantResponse

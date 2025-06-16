@@ -1,6 +1,6 @@
 package com.visteon.vfin.users.application
 
-import com.visteon.vfin.common.types.NameField
+import com.visteon.vfin.types.NameField
 import com.visteon.vfin.users.model.AppUserId
 import com.visteon.vfin.users.model.UserStatus
 import jakarta.validation.constraints.Email

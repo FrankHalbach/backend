@@ -1,7 +1,7 @@
 package com.visteon.vfin.users.model
 
-import com.visteon.vfin.common.validation.assertMatchesRegex
-import com.visteon.vfin.common.validation.assertNotEmpty
+import com.visteon.vfin.validation.assertMatchesRegex
+import com.visteon.vfin.validation.assertNotEmpty
 
 @JvmInline
 value class AppUserId private constructor(val value: String) {

@@ -1,4 +1,4 @@
-package com.visteon.vfin.common.exception
+package com.visteon.vfin.exception
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

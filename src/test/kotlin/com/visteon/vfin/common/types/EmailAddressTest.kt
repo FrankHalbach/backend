@@ -1,5 +1,6 @@
 package com.visteon.vfin.common.types
 
+import com.visteon.vfin.types.EmailAddress
 import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.test.assertFailsWith
 import org.junit.jupiter.api.Test

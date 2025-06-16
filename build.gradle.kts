@@ -1,5 +1,5 @@
 val exposedVersion: String by project
-
+val springModulithVersion: String by project
 plugins {
     kotlin("jvm") version "2.1.20"
     kotlin("plugin.spring") version "2.1.20"
@@ -54,6 +54,10 @@ dependencies {
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
 
+    implementation("org.springframework.modulith:spring-modulith-starter-core")
+    implementation("org.springframework.modulith:spring-modulith-docs")
+
+    testImplementation("org.springframework.modulith:spring-modulith-starter-test")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 
@@ -63,7 +67,12 @@ dependencies {
 
 
 }
+dependencyManagement {
 
+    imports {
+        mavenBom("org.springframework.modulith:spring-modulith-bom:$springModulithVersion")
+    }
+}
 kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict")

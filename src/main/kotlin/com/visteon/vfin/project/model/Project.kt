@@ -1,7 +1,6 @@
 package com.visteon.vfin.project.model
 
-import com.visteon.vfin.common.types.NameField
-import java.util.UUID
+import com.visteon.vfin.types.NameField
 
 data class Project (
     val id: ProjectId,
@@ -18,14 +17,14 @@ data class Project (
 
 
     companion object {
-        fun from(id: UUID, projectNumber: String, projectTitle: String, projectStatus: ProjectStatus): Project =
-            Project(
-                id = ProjectId(id),
-                projectNumber = NameField(projectNumber),
-                projectTitle = NameField(projectTitle),
-                projectStatus = projectStatus
-                //audit = AuditInfo()
-            )
+//        fun from(id: UUID, projectNumber: String, projectTitle: String, projectStatus: ProjectStatus): Project =
+//            Project(
+//                id = ProjectId(id),
+//                projectNumber = NameField(projectNumber),
+//                projectTitle = NameField(projectTitle),
+//                projectStatus = projectStatus
+//                //audit = AuditInfo()
+//            )
 
         fun new(projectNumber: String, projectTitle: String) : Project =
             Project(

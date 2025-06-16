@@ -1,10 +1,11 @@
 package com.visteon.vfin.project.application
 
-import com.visteon.vfin.common.exception.DuplicateEntityException
-import com.visteon.vfin.common.exception.EntityNotFoundException
+import com.visteon.vfin.exception.DuplicateEntityException
+import com.visteon.vfin.exception.EntityNotFoundException
 import com.visteon.vfin.project.infrastructure.ProjectRepository
 import com.visteon.vfin.project.model.Project
 import com.visteon.vfin.project.model.ProjectId
+import com.visteon.vfin.types.NameField
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -15,21 +16,22 @@ class ProjectService(
 ) {
     fun create(request: ProjectCreationRequest): Project {
 
-        if(repo.projectNumberExists(request.projectNumber))
+        if(repo.projectNumberExists(NameField.Companion(request.projectNumber)))
             throw DuplicateEntityException("Project", "Project Number", request.projectNumber)
 
-        val newProject = Project.new(request.projectNumber,request.projectTitle)
+        val newProject = Project.Companion.new(request.projectNumber,request.projectTitle)
 
         repo.create(newProject)
 
         return newProject
     }
+
     fun update(projectId: ProjectId, request: ProjectUpdateRequest): Project {
 
-        val current = repo.getById(projectId) ?: throw EntityNotFoundException("Project",projectId.value.toString())
+        val current = repo.getById(projectId) ?: throw EntityNotFoundException("Project", projectId.value.toString())
 
-        if(repo.projectNumberExistsForOtherProjects(projectId, request.projectNumber))
-            throw DuplicateEntityException("Project","Project Number", request.projectNumber)
+        if(repo.projectNumberExistsForOtherProjects(projectId, NameField.Companion(request.projectNumber)))
+            throw DuplicateEntityException("Project", "Project Number", request.projectNumber)
 
         val updated = current.update(request.projectNumber,request.projectTitle, request.projectStatus)
 
@@ -39,6 +41,6 @@ class ProjectService(
     }
 
     fun getAll():List<Project> = repo.getAll()
-    fun getById(id:ProjectId): Project? = repo.getById(id)
+    fun getById(id: ProjectId): Project? = repo.getById(id)
 
 }

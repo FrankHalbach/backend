@@ -1,7 +1,7 @@
 package com.visteon.vfin.users.model
 
-import com.visteon.vfin.common.types.NameField
-import com.visteon.vfin.common.types.EmailAddress
+import com.visteon.vfin.types.NameField
+import com.visteon.vfin.types.EmailAddress
 
 data class AppUser(
     val id : UserId,

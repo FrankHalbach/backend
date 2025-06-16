@@ -1,4 +1,4 @@
-package com.visteon.vfin.common.exception
+package com.visteon.vfin.exception
 
 class EmailAlreadyTakenException(
     emailAddress: String

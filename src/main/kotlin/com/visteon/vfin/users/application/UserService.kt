@@ -1,8 +1,8 @@
 package com.visteon.vfin.users.application
 
-import com.visteon.vfin.common.exception.DuplicateEntityException
-import com.visteon.vfin.common.exception.EmailAlreadyTakenException
-import com.visteon.vfin.common.exception.EntityNotFoundException
+import com.visteon.vfin.exception.DuplicateEntityException
+import com.visteon.vfin.exception.EmailAlreadyTakenException
+import com.visteon.vfin.exception.EntityNotFoundException
 import com.visteon.vfin.users.infrastructure.AppUserRepository
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId

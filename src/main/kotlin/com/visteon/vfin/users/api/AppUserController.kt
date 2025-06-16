@@ -1,5 +1,6 @@
-package com.visteon.vfin.users
+package com.visteon.vfin.users.api
 
+import com.visteon.vfin.project.infrastructure.ProjectRepository
 import com.visteon.vfin.users.application.AppUserCreationRequest
 import com.visteon.vfin.users.application.AppUserService
 import com.visteon.vfin.users.application.AppUserUpdateRequest
@@ -21,7 +22,7 @@ import java.util.UUID
 @RestController
 @RequestMapping("/api/users")
 class AppUserController(
-    private val service: AppUserService,
+    private val service: AppUserService
 ) {
 
     @PostMapping

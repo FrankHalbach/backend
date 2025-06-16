@@ -1,6 +1,6 @@
 package com.visteon.vfin.project.application
 
-import com.visteon.vfin.common.types.NameField
+import com.visteon.vfin.types.NameField
 import com.visteon.vfin.project.model.ProjectStatus
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size

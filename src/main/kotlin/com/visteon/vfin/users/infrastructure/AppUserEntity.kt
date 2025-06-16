@@ -1,7 +1,7 @@
 package com.visteon.vfin.users.infrastructure
 
-import com.visteon.vfin.common.types.EmailAddress
-import com.visteon.vfin.common.types.NameField
+import com.visteon.vfin.types.EmailAddress
+import com.visteon.vfin.types.NameField
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId
 import com.visteon.vfin.users.model.UserId
