@@ -1,7 +1,6 @@
 package com.visteon.vfin.project.infrastructure
 
 
-import com.visteon.vfin.types.NameField
 import com.visteon.vfin.project.model.Project
 import com.visteon.vfin.project.model.ProjectId
 import org.jetbrains.exposed.v1.core.SqlExpressionBuilder.eq
@@ -30,14 +29,14 @@ class ProjectRepository {
             it[projectStatus] = request.projectStatus
         }
 
-    fun projectNumberExists(projectNumber: NameField): Boolean = ProjectEntity
+    fun projectNumberExists(projectNumber: String): Boolean = ProjectEntity
         .selectAll()
         .where { ProjectEntity.projectNumber eq projectNumber }
         .limit(1)
         .empty()
         .not()
 
-    fun projectNumberExistsForOtherProjects(projectId: ProjectId, projectNumber: NameField): Boolean =
+    fun projectNumberExistsForOtherProjects(projectId: ProjectId, projectNumber: String): Boolean =
         ProjectEntity
             .selectAll()
             .where { (ProjectEntity.projectNumber eq projectNumber) and (ProjectEntity.id neq projectId) }

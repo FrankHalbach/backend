@@ -1,4 +1,4 @@
-package com.visteon.vfin.users.model
+package com.visteon.vfin.users
 
 import com.visteon.vfin.common.Ids
 import java.util.UUID

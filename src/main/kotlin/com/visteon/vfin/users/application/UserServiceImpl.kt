@@ -6,15 +6,19 @@ import com.visteon.vfin.exception.EntityNotFoundException
 import com.visteon.vfin.users.infrastructure.AppUserRepository
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId
-import com.visteon.vfin.users.model.UserId
+import com.visteon.vfin.users.UserId
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import com.visteon.vfin.users.application.AppUserCommandService
+import com.visteon.vfin.users.AppUserQueryService
+
+
 
 @Transactional
 @Service
-class AppUserService(private val repo: AppUserRepository) {
+class AppUserService(private val repo: AppUserRepository) : AppUserCommandService, AppUserQueryService {
 
-    fun create(req: AppUserCreationRequest): AppUser {
+    override fun create(req: AppUserCreationRequest): AppUser {
 
         if(repo.appUserIdExists(AppUserId(req.appUserId))){
             throw DuplicateEntityException("User","Id", req.appUserId)
@@ -37,7 +41,7 @@ class AppUserService(private val repo: AppUserRepository) {
 
     }
 
-    fun update(userId: UserId, req: AppUserUpdateRequest): AppUser {
+    override fun update(userId: UserId, req: AppUserUpdateRequest): AppUser {
 
         val existing = repo.getById(userId) ?: throw EntityNotFoundException("User", userId.value.toString())
 
@@ -57,10 +61,10 @@ class AppUserService(private val repo: AppUserRepository) {
         return updatedUser
     }
 
-    fun getById(userId: UserId): AppUser? = repo.getById(userId)
+   override fun getById(userId: UserId): AppUser? = repo.getById(userId)
 
-    fun getByAppUserId(appUserId: String): AppUser? =
+   override fun getByAppUserId(appUserId: String): AppUser? =
         repo.getByAppUserId(AppUserId(appUserId))
 
-    fun getAll(): List<AppUser> = repo.getAll()
+   override fun getAll(): List<AppUser> = repo.getAll()
 }

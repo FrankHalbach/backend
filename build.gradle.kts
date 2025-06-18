@@ -3,7 +3,7 @@ val springModulithVersion: String by project
 plugins {
     kotlin("jvm") version "2.1.20"
     kotlin("plugin.spring") version "2.1.20"
-    id("org.springframework.boot") version "3.4.5"
+    id("org.springframework.boot") version "3.5.0"
     id("io.spring.dependency-management") version "1.1.7"
 
 }
@@ -31,9 +31,11 @@ dependencies {
 
     //implementation("com.mysql:mysql-connector-j:9.3.0")
 
-    implementation("org.jetbrains.exposed:exposed-spring-boot-starter:${exposedVersion}")
+    implementation("org.jetbrains.exposed:exposed-spring-boot-starter:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
+  
     //implementation("org.jetbrains.exposed:exposed-migration:$exposedVersion")
 
 

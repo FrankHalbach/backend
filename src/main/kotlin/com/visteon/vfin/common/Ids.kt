@@ -5,6 +5,10 @@ import java.util.UUID
 
 
 object Ids {
+    
+    /**
+    * Generates a UUIDv7 (time-ordered).
+    */
     fun new(): UUID = UuidCreator.getTimeOrderedEpoch()  // UUIDv7
     fun empty(): UUID = UuidCreator.getNil()
 }

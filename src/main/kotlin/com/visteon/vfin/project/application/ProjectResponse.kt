@@ -13,7 +13,7 @@ data class ProjectResponse(
 
 fun Project.toResponse(): ProjectResponse = ProjectResponse(
     this.id.value,
-    this.projectNumber.value,
-    this.projectTitle.value,
+    this.projectNumber,
+    this.projectTitle,
     this.projectStatus
 )

@@ -13,8 +13,8 @@ internal class UserTest {
 
         val user = AppUser.new(" ID1", " John ", " Doe ", " a@b.com ")
         assertEquals("id1", user.appUserId.value)
-        assertEquals("John", user.firstName.value)
-        assertEquals("Doe", user.lastName.value)
+        assertEquals("John", user.firstName)
+        assertEquals("Doe", user.lastName)
         assertEquals("a@b.com", user.email.value)
     }
 

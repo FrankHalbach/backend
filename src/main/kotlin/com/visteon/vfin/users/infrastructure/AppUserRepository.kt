@@ -2,7 +2,7 @@ package com.visteon.vfin.users.infrastructure
 
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId
-import com.visteon.vfin.users.model.UserId
+import com.visteon.vfin.users.UserId
 import org.jetbrains.exposed.v1.core.and
 import org.jetbrains.exposed.v1.jdbc.insert
 import org.jetbrains.exposed.v1.jdbc.selectAll
@@ -17,8 +17,8 @@ class AppUserRepository {
         .insert {
             it[id] = user.id.value
             it[appUserId] = user.appUserId.value
-            it[firstName] = user.firstName.value
-            it[lastName] = user.lastName.value
+            it[firstName] = user.firstName
+            it[lastName] = user.lastName
             it[email] = user.email.value
             it[userStatus] = user.userStatus
         }
@@ -26,8 +26,8 @@ class AppUserRepository {
     fun update(user: AppUser) = AppUserEntity
         .update({ AppUserEntity.id eq user.id.value }) {
             it[appUserId] = user.appUserId.value
-            it[firstName] = user.firstName.value
-            it[lastName] = user.lastName.value
+            it[firstName] = user.firstName
+            it[lastName] = user.lastName
             it[email] = user.email.value
             it[userStatus] = user.userStatus
         }

@@ -1,9 +1,9 @@
 package com.visteon.vfin.project.infrastructure
 
-import com.visteon.vfin.types.NameField
 import com.visteon.vfin.project.model.Project
 import com.visteon.vfin.project.model.ProjectId
 import com.visteon.vfin.project.model.ProjectStatus
+import com.visteon.vfin.common.FieldLengths
 import org.jetbrains.exposed.v1.core.ColumnTransformer
 import org.jetbrains.exposed.v1.core.ResultRow
 import org.jetbrains.exposed.v1.core.Table
@@ -12,9 +12,9 @@ import java.util.*
 
 object ProjectEntity : Table("PROJECT") {
     val id = uuid("ID").uniqueIndex().transform(ProjectIdTransformer())
-    val projectNumber = varchar("PROJECT_NUMBER", NameField.MAX_LENGTH).uniqueIndex().transform(NameFieldTransformer())
-    val projectTitle = varchar("PROJECT_TITLE", NameField.MAX_LENGTH).transform(NameFieldTransformer())
-    val projectStatus = enumerationByName("PROJECT_STATUS",64, ProjectStatus::class)
+    val projectNumber = varchar("PROJECT_NUMBER", FieldLengths.LABEL_MAX).uniqueIndex()
+    val projectTitle = varchar("PROJECT_TITLE",  FieldLengths.LABEL_MAX)
+    val projectStatus = enumerationByName("PROJECT_STATUS",FieldLengths.ENUM, ProjectStatus::class)
 }
 
 
@@ -29,9 +29,4 @@ fun ResultRow.toProject(): Project = Project(
 class ProjectIdTransformer : ColumnTransformer<UUID, ProjectId> {
     override fun wrap(value: UUID) = ProjectId(value)
     override fun unwrap(value: ProjectId): UUID  = value.value
-}
-
-class NameFieldTransformer : ColumnTransformer<String, NameField> {
-    override fun wrap(value: String) = NameField(value)
-    override fun unwrap(value: NameField): String  = value.value
 }

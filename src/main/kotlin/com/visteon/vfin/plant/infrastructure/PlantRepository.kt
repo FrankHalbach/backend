@@ -16,14 +16,18 @@ class PlantRepository
     fun create(newPlant: Plant) = PlantEntity
         .insert {
             it[id] = newPlant.plantId.value
-            it[code] = newPlant.code.value
-            it[name] = newPlant.name.value
+            it[code] = newPlant.code
+            it[name] = newPlant.name
+            it[createdAt] = newPlant.audit.createdAt
+            it[createdBy] = newPlant.audit.createdBy.value
     }
 
     fun update(updated: Plant) = PlantEntity
         .update({ PlantEntity.id eq updated.plantId.value }) {
-            it[code] = updated.code.value
-            it[name] = updated.name.value
+            it[code] = updated.code
+            it[name] = updated.name
+            it[modifiedBy] = updated.audit.modifiedBy?.value
+            it[modifiedAt] = updated.audit.modifiedAt
         }
 
 
