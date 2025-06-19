@@ -9,12 +9,12 @@ import org.jetbrains.exposed.v1.core.ResultRow
 import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
 import com.visteon.vfin.common.FieldLengths
 
-object AppUserEntity : UUIDTable("APP_USER") {
-    val appUserId = varchar("APP_USER_ID", FieldLengths.UUID).uniqueIndex()
-    val firstName = varchar("FIRST_NAME", FieldLengths.LABEL_MAX)
-    val lastName = varchar("LAST_NAME", FieldLengths.LABEL_MAX)
-    val email = varchar("EMAIL", EmailAddress.MAX_LENGTH).uniqueIndex()
-    val userStatus = enumerationByName("USER_STATUS",FieldLengths.ENUM, UserStatus::class)
+object AppUserEntity : UUIDTable("app_user") {
+    val appUserId = varchar("app_user_id", FieldLengths.UUID).uniqueIndex()
+    val firstName = varchar("first_name", FieldLengths.LABEL_MAX)
+    val lastName = varchar("last_name", FieldLengths.LABEL_MAX)
+    val email = varchar("email", EmailAddress.MAX_LENGTH).uniqueIndex()
+    val userStatus = enumerationByName("user_status", FieldLengths.ENUM, UserStatus::class)
 }
 
 fun ResultRow.toAppUser(): AppUser = AppUser(

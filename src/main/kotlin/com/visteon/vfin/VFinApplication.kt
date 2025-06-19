@@ -31,7 +31,7 @@ interface UserContext {
 @Component
 class DummyUserContext : UserContext {
     override fun currentUserId(): UserId =
-        UserId(UUID.fromString("00000000-0000-0000-0000-000000000001")) // or UUIDv7, whatever you use
+        UserId(UUID.fromString("018fa4d6-8fd3-7ccf-92e6-4cb0538e5c3b")) // or UUIDv7, whatever you use
 }
 
 //@Configuration

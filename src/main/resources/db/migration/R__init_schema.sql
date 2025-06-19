@@ -1,74 +1,63 @@
-
-CREATE TABLE APP_USER (
-    ID           RAW(16) PRIMARY KEY,
-    APP_USER_ID  VARCHAR2(255 CHAR) NOT NULL UNIQUE,
-    FIRST_NAME   VARCHAR2(255 CHAR) NOT NULL,
-    LAST_NAME    VARCHAR2(255 CHAR) NOT NULL,
-    EMAIL        VARCHAR2(255 CHAR) NOT NULL UNIQUE,
-    USER_STATUS  VARCHAR2(64 CHAR)  NOT NULL
+create table app_user (
+    id           raw(16) primary key,
+    app_user_id  varchar2(255 char) not null unique,
+    first_name   varchar2(255 char) not null,
+    last_name    varchar2(255 char) not null,
+    email        varchar2(255 char) not null unique,
+    user_status  varchar2(64 char)  not null
 );
 
-
-CREATE TABLE USER_GROUP (
-    ID     RAW(16) PRIMARY KEY,
-    TITLE  VARCHAR2(255 CHAR) NOT NULL
+create table user_group (
+    id     raw(16) primary key,
+    title  varchar2(255 char) not null
 );
 
-
-CREATE TABLE TEAM (
-    ID     RAW(16) PRIMARY KEY,
-    TITLE  VARCHAR2(255 CHAR) NOT NULL
+create table team (
+    id     raw(16) primary key,
+    title  varchar2(255 char) not null
 );
 
-
-CREATE TABLE TEAM_MEMBER (
-    TEAM_ID     RAW(16) NOT NULL,
-    USER_ID     RAW(16) NOT NULL,
-    ACCESS_TYPE VARCHAR2(64 CHAR) NOT NULL,
-    PRIMARY KEY (TEAM_ID, USER_ID),
-    CONSTRAINT FK_TEAM_MEMBER_TEAM FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID),
-    CONSTRAINT FK_TEAM_MEMBER_USER FOREIGN KEY (USER_ID) REFERENCES APP_USER(ID)
+create table team_member (
+    team_id     raw(16) not null,
+    user_id     raw(16) not null,
+    access_type varchar2(64 char) not null,
+    primary key (team_id, user_id),
+    constraint fk_team_member_team foreign key (team_id) references team(id),
+    constraint fk_team_member_user foreign key (user_id) references app_user(id)
 );
 
-CREATE TABLE USER_GROUP_MEMBERS (
-    USER_GROUP_ID RAW(16) NOT NULL,
-    TEAM_ID       RAW(16) NOT NULL,
-    PRIMARY KEY (USER_GROUP_ID, TEAM_ID),
-    CONSTRAINT FK_USER_GROUP_MEMBERS_GROUP FOREIGN KEY (USER_GROUP_ID) REFERENCES USER_GROUP(ID),
-    CONSTRAINT FK_USER_GROUP_MEMBERS_TEAM FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID)
+create table user_group_members (
+    user_group_id raw(16) not null,
+    team_id       raw(16) not null,
+    primary key (user_group_id, team_id),
+    constraint fk_user_group_members_group foreign key (user_group_id) references user_group(id),
+    constraint fk_user_group_members_team foreign key (team_id) references team(id)
 );
 
-
-
-CREATE TABLE PROJECT (
-    ID              RAW(16) PRIMARY KEY,
-    PROJECT_NUMBER  VARCHAR2(255 CHAR) NOT NULL UNIQUE,
-    PROJECT_TITLE   VARCHAR2(255 CHAR) NOT NULL,
-    PROJECT_STATUS  VARCHAR2(64 CHAR)  NOT NULL,
-    USER_GROUP_ID   RAW(16)            NOT NULL,
-    CONSTRAINT FK_PROJECT_USERGROUP FOREIGN KEY (USER_GROUP_ID) REFERENCES USER_GROUP(ID)
+create table project (
+    id              raw(16) primary key,
+    project_number  varchar2(255 char) not null unique,
+    project_title   varchar2(255 char) not null,
+    project_status  varchar2(64 char)  not null,
+    user_group_id   raw(16)            not null,
+    constraint fk_project_usergroup foreign key (user_group_id) references user_group(id)
 );
 
-
-CREATE TABLE PLANT (
-    ID    RAW(16) PRIMARY KEY,
-    CODE  VARCHAR2(255 CHAR) NOT NULL UNIQUE,
-    NAME  VARCHAR2(255 CHAR) NOT NULL,
-    CREATED_AT TIMESTAMP WITH TIME ZONE NOT NULL,
-    CREATED_BY VARCHAR2(255 CHAR) NOT NULL,
-    MODIFIED_AT TIMESTAMP WITH TIME ZONE,
-    MODIFIED_BY VARCHAR2(255 CHAR)
+create table plant (
+    id           raw(16) primary key,
+    code         varchar2(255 char) not null unique,
+    name         varchar2(255 char) not null,
+    created_at   timestamp with time zone not null,
+    created_by   varchar2(255 char) not null,
+    modified_at  timestamp with time zone,
+    modified_by  varchar2(255 char)
 );
 
-
-
-
-CREATE TABLE AUDIT_LOG (
-    ID           RAW(16) PRIMARY KEY,
-    USER_ID      RAW(16) NOT NULL,
-    REQUEST_TYPE VARCHAR2(255 CHAR) NOT NULL,
-    REQUEST_BODY CLOB,
-    TIMESTAMP    TIMESTAMP WITH TIME ZONE NOT NULL,
-    CONSTRAINT FK_AUDIT_LOG_USER
-        FOREIGN KEY (USER_ID) REFERENCES APP_USER(ID)
+create table audit_log (
+    id            raw(16) primary key,
+    user_id       raw(16) not null,
+    request_type  varchar2(255 char) not null,
+    request_body  clob,
+    timestamp     timestamp with time zone not null,
+    constraint fk_audit_log_user foreign key (user_id) references app_user(id)
 );
