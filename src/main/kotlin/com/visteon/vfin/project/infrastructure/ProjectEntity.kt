@@ -10,11 +10,11 @@ import org.jetbrains.exposed.v1.core.Table
 import java.util.*
 
 
-object ProjectEntity : Table("project") {
-    val id = uuid("id").uniqueIndex().transform(ProjectIdTransformer())
-    val projectNumber = varchar("project_number", FieldLengths.LABEL_MAX).uniqueIndex()
-    val projectTitle = varchar("project_title",  FieldLengths.LABEL_MAX)
-    val projectStatus = enumerationByName("project_status",FieldLengths.ENUM, ProjectStatus::class)
+object ProjectEntity : Table("PROJECT") {
+    val id = uuid("ID").uniqueIndex().transform(ProjectIdTransformer())
+    val projectNumber = varchar("PROJECT_NAME", FieldLengths.LABEL_MAX).uniqueIndex()
+    val projectTitle = varchar("PROJECT_TITLE",  FieldLengths.LABEL_MAX)
+    val projectStatus = enumerationByName("PROJECT_STATUS",FieldLengths.ENUM, ProjectStatus::class)
 }
 
 

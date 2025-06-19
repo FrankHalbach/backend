@@ -9,13 +9,13 @@ import org.jetbrains.exposed.v1.javatime.*
 
 
 
-object PlantEntity : UUIDTable("plant") {
- val code = varchar("code", FieldLengths.LABEL_MAX).uniqueIndex()
- val name = varchar("name", FieldLengths.LABEL_MAX)
- val createdAt = timestamp("created_at")
- val createdBy = uuid("created_by")
- val modifiedAt = timestamp("modified_at").nullable()
- val modifiedBy = uuid("modified_by").nullable()
+object PlantEntity : UUIDTable("PLANT") {
+ val code = varchar("CODE", FieldLengths.LABEL_MAX).uniqueIndex()
+ val name = varchar("NAME", FieldLengths.LABEL_MAX)
+ val createdAt = timestamp("CREATED_AT")
+ val createdBy = uuid("CREATED_BY")
+ val modifiedAt = timestamp("MODIFIED_AT").nullable()
+ val modifiedBy = uuid("MODIFIED_BY").nullable()
 }
 
 
