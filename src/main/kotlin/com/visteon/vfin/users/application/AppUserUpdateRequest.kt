@@ -3,10 +3,12 @@ package com.visteon.vfin.users.application
 import com.visteon.vfin.common.FieldLengths
 import com.visteon.vfin.users.model.AppUserId
 import com.visteon.vfin.users.model.UserStatus
+import com.visteon.vfin.users.model.UserRole
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
+import jakarta.validation.constraints.NotEmpty
 
 data class AppUserUpdateRequest(
 
@@ -26,6 +28,9 @@ data class AppUserUpdateRequest(
     @field:Email
     val email: String,
 
-    val userStatus: UserStatus
+    val userStatus: UserStatus,
+
+    @field:NotEmpty(message = "At least one role must be assigned")
+    val userRoles: Set<UserRole>
 
 )

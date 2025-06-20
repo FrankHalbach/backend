@@ -16,12 +16,3 @@ object AppUserEntity : UUIDTable("APP_USER") {
     val email = varchar("EMAIL", EmailAddress.MAX_LENGTH).uniqueIndex()
     val userStatus = enumerationByName("USER_STATUS", FieldLengths.ENUM, UserStatus::class)
 }
-
-fun ResultRow.toAppUser(): AppUser = AppUser(
-    id = UserId(this[AppUserEntity.id].value),
-    appUserId = AppUserId(this[AppUserEntity.appUserId]),
-    firstName = this[AppUserEntity.firstName],
-    lastName = this[AppUserEntity.lastName],
-    email = EmailAddress(this[AppUserEntity.email]),
-    userStatus =  this[AppUserEntity.userStatus]
-)

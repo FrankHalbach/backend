@@ -4,3 +4,4 @@ enum class UserStatus {
     ACTIVE,
     INACTIVE
 }
+

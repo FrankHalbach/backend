@@ -11,7 +11,7 @@ internal class UserTest {
     fun `should create User from valid inputs`() {
 
 
-        val user = AppUser.new(" ID1", " John ", " Doe ", " a@b.com ")
+        val user = AppUser.new(AppUserId(" ID1"), " John ", " Doe ", EmailAddress(" a@b.com "),setOf(UserRole.ADMIN))
         assertEquals("id1", user.appUserId.value)
         assertEquals("John", user.firstName)
         assertEquals("Doe", user.lastName)
@@ -21,7 +21,7 @@ internal class UserTest {
     @Test
     fun `should throw exception for invalid email`() {
         val exception = assertFailsWith<IllegalArgumentException> {
-            AppUser.new("id", "John", "Doe", "bad-email")
+            AppUser.new(AppUserId("id"), "John", "Doe", EmailAddress("bad-email"),setOf(UserRole.ADMIN))
         }
         assertEquals(
             "Email must match pattern: ${EmailAddress.REGEX.pattern}",

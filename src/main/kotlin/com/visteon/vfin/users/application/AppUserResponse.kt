@@ -2,6 +2,7 @@ package com.visteon.vfin.users.application
 
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.UserStatus
+import com.visteon.vfin.users.model.UserRole
 
 data class UserResponse(
     val id: String,
@@ -9,7 +10,8 @@ data class UserResponse(
     val firstName: String,
     val lastName: String,
     val email: String,
-    val userStatus: UserStatus
+    val userStatus: UserStatus,
+    val userRoles: Set<UserRole>
 )
 
 fun AppUser.toResponse(): UserResponse = UserResponse(
@@ -18,5 +20,7 @@ fun AppUser.toResponse(): UserResponse = UserResponse(
     firstName = this.firstName,
     lastName = this.lastName,
     email = this.email.value,
-    userStatus = this.userStatus
+    userStatus = this.userStatus,
+    userRoles = this.userRoles
+
 )
