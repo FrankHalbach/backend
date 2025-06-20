@@ -12,7 +12,7 @@ import java.util.*
 
 object ProjectEntity : Table("PROJECT") {
     val id = uuid("ID").uniqueIndex().transform(ProjectIdTransformer())
-    val projectNumber = varchar("PROJECT_NAME", FieldLengths.LABEL_MAX).uniqueIndex()
+    val projectNumber = varchar("PROJECT_NUMBER", FieldLengths.LABEL_MAX).uniqueIndex()
     val projectTitle = varchar("PROJECT_TITLE",  FieldLengths.LABEL_MAX)
     val projectStatus = enumerationByName("PROJECT_STATUS",FieldLengths.ENUM, ProjectStatus::class)
 }
