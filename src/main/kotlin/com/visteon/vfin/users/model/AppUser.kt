@@ -1,7 +1,7 @@
 package com.visteon.vfin.users.model
 
-import com.visteon.vfin.users.UserId
-import com.visteon.vfin.types.EmailAddress
+import com.visteon.vfin.sharedkernel.identifiers.UserId
+import com.visteon.vfin.sharedkernel.types.EmailAddress
 
 data class AppUser private constructor(
     val id : UserId,
@@ -14,14 +14,15 @@ data class AppUser private constructor(
 ) {
     // Update user via copy.
     fun update(appUserId: AppUserId, firstName: String, lastName: String, email: EmailAddress, userStatus: UserStatus, userRoles: Set<UserRole>): AppUser =
-        this.copy(
-            appUserId = appUserId,
-            firstName = firstName,
-            lastName = lastName,
-            email = email,
-            userStatus = userStatus,
-            userRoles = userRoles
-        )
+     AppUser(
+        id = this.id,
+        appUserId = appUserId,
+        firstName = firstName.trim(),
+        lastName = lastName.trim(),
+        email = email,
+        userStatus = userStatus,
+        userRoles = userRoles
+    )      
 
 
     companion object {
@@ -52,8 +53,8 @@ data class AppUser private constructor(
             AppUser(
                 id = UserId.new(),
                 appUserId = appUserId,
-                firstName = firstName,
-                lastName = lastName,
+                firstName = firstName.trim(),
+                lastName = lastName.trim(),
                 email = email,
                 userStatus = UserStatus.ACTIVE,
                 userRoles = userRoles

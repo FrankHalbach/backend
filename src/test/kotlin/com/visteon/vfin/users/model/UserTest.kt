@@ -3,7 +3,7 @@ package com.visteon.vfin.users.model
 import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.test.assertFailsWith
 import org.junit.jupiter.api.Test
-import com.visteon.vfin.types.EmailAddress
+import com.visteon.vfin.sharedkernel.types.EmailAddress
 
 internal class UserTest {
 

@@ -11,4 +11,4 @@ object Ids {
     */
     fun new(): UUID = UuidCreator.getTimeOrderedEpoch()  // UUIDv7
     fun empty(): UUID = UuidCreator.getNil()
-}
+} 

@@ -1,7 +1,7 @@
 package com.visteon.vfin.users.application
 
 import com.visteon.vfin.users.model.AppUser
-import com.visteon.vfin.users.UserId
+import com.visteon.vfin.sharedkernel.identifiers.UserId
 
 
 interface AppUserCommandService {

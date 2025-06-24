@@ -1,8 +1,8 @@
 package com.visteon.vfin.common.validation
 
-import com.visteon.vfin.validation.assertLength
-import com.visteon.vfin.validation.assertMatchesRegex
-import com.visteon.vfin.validation.assertNotEmpty
+import com.visteon.vfin.sharedkernel.validation.assertLength
+import com.visteon.vfin.sharedkernel.validation.assertMatchesRegex
+import com.visteon.vfin.sharedkernel.validation.assertNotEmpty
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

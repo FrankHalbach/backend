@@ -2,7 +2,7 @@ package com.visteon.vfin.plant.infrastructure
 
 import com.visteon.vfin.common.FieldLengths
 import com.visteon.vfin.plant.model.Plant
-import com.visteon.vfin.users.UserId
+import com.visteon.vfin.sharedkernel.identifiers.UserId
 import org.jetbrains.exposed.v1.core.ResultRow
 import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
 import org.jetbrains.exposed.v1.javatime.*

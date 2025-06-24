@@ -1,8 +1,10 @@
-package com.visteon.vfin.common.types
+package com.visteon.vfin.sharedkernel.types
 
-import com.visteon.vfin.users.UserId
+import com.visteon.vfin.sharedkernel.identifiers.UserId
 import java.time.Instant
+import org.springframework.modulith.NamedInterface;
 
+@NamedInterface
 data class AuditInfo(
    val createdAt: Instant,
    val createdBy: UserId,
@@ -17,16 +19,13 @@ data class AuditInfo(
             modifiedAt = Instant.now(),            
             modifiedBy = userId
         )
-        
+   @NamedInterface
    companion object {
         fun create(userId: UserId): AuditInfo =
             AuditInfo(
                 createdAt = Instant.now(),
                 createdBy = userId
             )
-        }
-       
+        }       
 
 }
-
-

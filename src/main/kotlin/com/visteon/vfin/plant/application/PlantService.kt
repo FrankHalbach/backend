@@ -5,20 +5,21 @@ import com.visteon.vfin.exception.EntityNotFoundException
 import com.visteon.vfin.plant.infrastructure.PlantRepository
 import com.visteon.vfin.plant.model.Plant
 import com.visteon.vfin.plant.model.PlantId
-import com.visteon.vfin.users.UserId
+import com.visteon.vfin.sharedkernel.identifiers.UserId
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import com.visteon.vfin.UserContext
+
 
 
 @Transactional
 @Service
 class PlantService(
     val repository: PlantRepository,
-    val userContext: UserContext
+    val userContext: UserContext    
 ) {
     fun create(req: PlantCreationRequest): Plant {
-
+        
         if(repository.plantCodeExists(req.code))
             throw DuplicateEntityException("Plant","Code", req.code)
 

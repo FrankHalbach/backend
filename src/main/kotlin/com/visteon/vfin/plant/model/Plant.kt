@@ -1,8 +1,8 @@
 package com.visteon.vfin.plant.model
 
 import com.visteon.vfin.common.Ids
-import com.visteon.vfin.common.types.AuditInfo
-import com.visteon.vfin.users.UserId
+import com.visteon.vfin.sharedkernel.types.AuditInfo
+import com.visteon.vfin.sharedkernel.identifiers.UserId
 import java.time.Instant
 import java.util.UUID
 

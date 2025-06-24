@@ -1,7 +1,7 @@
 package com.visteon.vfin.users.api
 import com.visteon.vfin.users.*
 import com.visteon.vfin.users.application.*
-import com.visteon.vfin.users.UserId
+import com.visteon.vfin.sharedkernel.identifiers.UserId
 import com.visteon.vfin.plant.application.PlantService
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity

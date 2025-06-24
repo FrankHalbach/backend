@@ -6,8 +6,8 @@ import com.visteon.vfin.exception.EntityNotFoundException
 import com.visteon.vfin.users.infrastructure.AppUserRepository
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId
-import com.visteon.vfin.users.UserId
-import com.visteon.vfin.types.EmailAddress
+import com.visteon.vfin.sharedkernel.identifiers.UserId
+import com.visteon.vfin.sharedkernel.types.EmailAddress
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import com.visteon.vfin.users.application.AppUserCommandService

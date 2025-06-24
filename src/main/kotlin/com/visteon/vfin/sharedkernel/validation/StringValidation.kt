@@ -1,4 +1,5 @@
-package com.visteon.vfin.validation
+@file:org.springframework.modulith.NamedInterface
+package com.visteon.vfin.sharedkernel.validation
 
 
 fun String.assertNotEmpty(fieldName: String = "String"): String {

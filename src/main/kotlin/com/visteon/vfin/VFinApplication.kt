@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.ImportAutoConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-import com.visteon.vfin.users.UserId
+import com.visteon.vfin.sharedkernel.identifiers.UserId
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.stereotype.Component
 import java.util.UUID

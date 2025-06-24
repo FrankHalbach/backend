@@ -3,8 +3,8 @@ package com.visteon.vfin.users.infrastructure
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.UserRole
 import com.visteon.vfin.users.model.AppUserId
-import com.visteon.vfin.users.UserId
-import com.visteon.vfin.types.EmailAddress
+import com.visteon.vfin.sharedkernel.identifiers.UserId
+import com.visteon.vfin.sharedkernel.types.EmailAddress
 import org.jetbrains.exposed.v1.core.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.v1.core.ResultRow
 import org.jetbrains.exposed.v1.core.and

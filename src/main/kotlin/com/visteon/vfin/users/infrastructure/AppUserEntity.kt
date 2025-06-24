@@ -1,9 +1,9 @@
 package com.visteon.vfin.users.infrastructure
 
-import com.visteon.vfin.types.EmailAddress
+import com.visteon.vfin.sharedkernel.types.EmailAddress
 import com.visteon.vfin.users.model.AppUser
 import com.visteon.vfin.users.model.AppUserId
-import com.visteon.vfin.users.UserId
+import com.visteon.vfin.sharedkernel.identifiers.UserId
 import com.visteon.vfin.users.model.UserStatus
 import org.jetbrains.exposed.v1.core.ResultRow
 import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
