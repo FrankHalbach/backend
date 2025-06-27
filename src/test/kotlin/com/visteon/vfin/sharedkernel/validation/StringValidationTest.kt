@@ -1,4 +1,4 @@
-package com.visteon.vfin.common.validation
+package com.visteon.vfin.sharedkernel.validation
 
 import com.visteon.vfin.sharedkernel.validation.assertLength
 import com.visteon.vfin.sharedkernel.validation.assertMatchesRegex

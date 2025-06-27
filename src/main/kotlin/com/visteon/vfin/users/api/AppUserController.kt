@@ -10,7 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import java.util.*
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/admin/users")
 class AppUserController(
     private val cmdService: AppUserCommandService,
     private val queryService: AppUserQueryService,

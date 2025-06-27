@@ -1,17 +1,16 @@
-package com.visteon.vfin.common.types
+package com.visteon.vfin.sharedkernel.types
 
-import com.visteon.vfin.sharedkernel.types.EmailAddress
-import org.junit.jupiter.api.Assertions.assertEquals
-import kotlin.test.assertFailsWith
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import kotlin.test.assertFailsWith
 
 internal class EmailAddressTest {
 
     @Test
     fun `should create EmailAddress with valid input`() {
         val email = EmailAddress(" user@example.com ")
-        assertEquals("user@example.com", email.value)
-        assertEquals("user@example.com", email.toString())
+        Assertions.assertEquals("user@example.com", email.value)
+        Assertions.assertEquals("user@example.com", email.toString())
     }
 
     @Test
@@ -19,7 +18,7 @@ internal class EmailAddressTest {
         val exception = assertFailsWith<IllegalArgumentException> {
             EmailAddress("")
         }
-        assertEquals("Email must not be empty.", exception.message)
+        Assertions.assertEquals("Email must not be empty.", exception.message)
     }
 
     @Test
@@ -27,7 +26,7 @@ internal class EmailAddressTest {
         val exception = assertFailsWith<IllegalArgumentException> {
             EmailAddress("a@b")
         }
-        assertEquals(
+        Assertions.assertEquals(
             "Email must be between 5 and ${EmailAddress.MAX_LENGTH} characters.",
             exception.message
         )
@@ -39,7 +38,7 @@ internal class EmailAddressTest {
         val exception = assertFailsWith<IllegalArgumentException> {
             EmailAddress(invalid)
         }
-        assertEquals(
+        Assertions.assertEquals(
             "Email must match pattern: ${EmailAddress.REGEX.pattern}",
             exception.message
         )
@@ -52,7 +51,7 @@ internal class EmailAddressTest {
         val exception = assertFailsWith<IllegalArgumentException> {
             EmailAddress(longEmail)
         }
-        assertEquals(
+        Assertions.assertEquals(
             "Email must be between 5 and ${EmailAddress.MAX_LENGTH} characters.",
             exception.message
         )
