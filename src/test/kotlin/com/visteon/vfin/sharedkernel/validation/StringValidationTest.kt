@@ -1,8 +1,5 @@
 package com.visteon.vfin.sharedkernel.validation
 
-import com.visteon.vfin.sharedkernel.validation.assertLength
-import com.visteon.vfin.sharedkernel.validation.assertMatchesRegex
-import com.visteon.vfin.sharedkernel.validation.assertNotEmpty
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -26,24 +23,29 @@ internal class StringValidationTest {
 
     @Test
     fun `assertLength returnsString whenWithinBounds`() {
-        val result = "hello".assertLength(3, 6, "TestField")
+        val result = "hello"
+            .assertMinLength(3,"TestField")
+            .assertMaxLength( 6, "TestField")
         assertEquals("hello", result)
     }
 
     @Test
     fun `assertLength throws whenTooShort`() {
         val exception = assertThrows<IllegalArgumentException> {
-            "hi".assertLength(3, 6, "TestField")
+            "hi"
+                .assertMinLength(3,"TestField")
+
         }
-        assertEquals("TestField must be between 3 and 6 characters.", exception.message)
+        assertEquals("TestField must be at least 3 characters.", exception.message)
     }
 
     @Test
     fun `assertLength throws whenTooLong`() {
         val exception = assertThrows<IllegalArgumentException> {
-            "toolong".assertLength(3, 6, "TestField")
+            "toolong"
+                .assertMaxLength( 6, "TestField")
         }
-        assertEquals("TestField must be between 3 and 6 characters.", exception.message)
+        assertEquals("TestField must be at most 6 characters.", exception.message)
     }
 
     @Test

@@ -5,11 +5,10 @@ import com.visteon.vfin.exception.EntityNotFoundException
 import com.visteon.vfin.plant.infrastructure.PlantRepository
 import com.visteon.vfin.plant.model.Plant
 import com.visteon.vfin.plant.model.PlantId
-import com.visteon.vfin.sharedkernel.identifiers.UserId
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import com.visteon.vfin.UserContext
-
+import com.visteon.vfin.sharedkernel.types.AuditInfo
 
 
 @Transactional
@@ -23,10 +22,11 @@ class PlantService(
         if(repository.plantCodeExists(req.code))
             throw DuplicateEntityException("Plant","Code", req.code)
 
-        val newPlant = Plant.new(
+        val newPlant = Plant(
+            plantId = PlantId.new(),
             code = req.code,
-            name = req.name,    
-            userContext.currentUserId()      
+            name = req.name,
+            audit = AuditInfo.create(userContext.currentUserId())
         )
 
         repository.create(newPlant)
@@ -41,7 +41,11 @@ class PlantService(
         if(repository.plantCodeExistsOnOtherPlants(plantId,req.code))
             throw DuplicateEntityException("Plant","Code", req.code)
 
-        val updatedPlant = current.update(req.name,req.code,userContext.currentUserId())
+        val updatedPlant = current.copy(
+            name = req.name,
+            code = req.code,
+            audit = current.audit.updated(userContext.currentUserId())
+        )
 
         repository.update(updatedPlant)
 

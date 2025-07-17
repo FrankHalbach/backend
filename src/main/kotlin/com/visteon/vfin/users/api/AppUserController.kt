@@ -3,6 +3,7 @@ import com.visteon.vfin.users.*
 import com.visteon.vfin.users.application.*
 import com.visteon.vfin.sharedkernel.identifiers.UserId
 import com.visteon.vfin.plant.application.PlantService
+import com.visteon.vfin.users.model.UserStatus
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -22,6 +23,7 @@ class AppUserController(
 
         val appUser = cmdService.create(req)
 
+        // do we even need this?
         val location = ServletUriComponentsBuilder
             .fromCurrentRequest()
             .path("/{id}")

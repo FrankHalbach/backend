@@ -2,7 +2,9 @@ package com.visteon.vfin.plant.infrastructure
 
 import com.visteon.vfin.common.FieldLengths
 import com.visteon.vfin.plant.model.Plant
+import com.visteon.vfin.plant.model.PlantId
 import com.visteon.vfin.sharedkernel.identifiers.UserId
+import com.visteon.vfin.sharedkernel.types.AuditInfo
 import org.jetbrains.exposed.v1.core.ResultRow
 import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
 import org.jetbrains.exposed.v1.javatime.*
@@ -19,12 +21,13 @@ object PlantEntity : UUIDTable("PLANT") {
 }
 
 
-fun ResultRow.toDomain(): Plant = Plant.from(
-    this[PlantEntity.id].value,
+fun ResultRow.toDomain(): Plant = Plant(
+    PlantId(this[PlantEntity.id].value),
     this[PlantEntity.code],
     this[PlantEntity.name],
-    this[PlantEntity.createdAt],
-    UserId(this[PlantEntity.createdBy]),
-    this[PlantEntity.modifiedAt],
-    this[PlantEntity.modifiedBy]?.let { UserId(it) }
+    AuditInfo(
+        this[PlantEntity.createdAt],
+        UserId(this[PlantEntity.createdBy]),
+        this[PlantEntity.modifiedAt],
+        this[PlantEntity.modifiedBy]?.let { UserId(it) })
 )

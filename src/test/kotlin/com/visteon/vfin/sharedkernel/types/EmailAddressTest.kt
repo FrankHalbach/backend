@@ -27,7 +27,7 @@ internal class EmailAddressTest {
             EmailAddress("a@b")
         }
         Assertions.assertEquals(
-            "Email must be between 5 and ${EmailAddress.MAX_LENGTH} characters.",
+            "Email must be at least ${EmailAddress.MIN_LENGTH} characters.",
             exception.message
         )
     }
@@ -52,7 +52,7 @@ internal class EmailAddressTest {
             EmailAddress(longEmail)
         }
         Assertions.assertEquals(
-            "Email must be between 5 and ${EmailAddress.MAX_LENGTH} characters.",
+            "Email must be at most ${EmailAddress.MAX_LENGTH} characters.",
             exception.message
         )
     }

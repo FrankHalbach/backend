@@ -9,9 +9,17 @@ fun String.assertNotEmpty(fieldName: String = "String"): String {
     return this
 }
 
-fun String.assertLength(min: Int, max: Int, fieldName: String = "String"): String {
-    require(this.length in min..max) {
-        "$fieldName must be between $min and $max characters."
+
+fun String.assertMinLength(min: Int, fieldName: String = "String"): String {
+    require(this.length >= min) {
+        "$fieldName must be at least $min characters."
+    }
+    return this
+}
+
+fun String.assertMaxLength(max: Int, fieldName: String = "String"): String {
+    require(this.length <= max) {
+        "$fieldName must be at most $max characters."
     }
     return this
 }

@@ -1,5 +1,6 @@
 val exposedVersion: String by project
 val springModulithVersion: String by project
+
 plugins {
     kotlin("jvm") version "2.1.20"
     kotlin("plugin.spring") version "2.1.20"
@@ -54,7 +55,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     //runtimeOnly("com.h2database:h2")
 
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9")
 
     implementation("org.springframework.modulith:spring-modulith-starter-core")
     implementation("org.springframework.modulith:spring-modulith-docs")

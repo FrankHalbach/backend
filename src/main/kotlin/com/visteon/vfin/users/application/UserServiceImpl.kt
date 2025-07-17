@@ -10,9 +10,10 @@ import com.visteon.vfin.sharedkernel.identifiers.UserId
 import com.visteon.vfin.sharedkernel.types.EmailAddress
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import com.visteon.vfin.users.application.AppUserCommandService
 import com.visteon.vfin.users.AppUserQueryService
-
+import com.visteon.vfin.users.model.FirstName
+import com.visteon.vfin.users.model.LastName
+import com.visteon.vfin.users.model.UserStatus
 
 
 @Transactional
@@ -28,11 +29,13 @@ class AppUserService(private val repo: AppUserRepository) : AppUserCommandServic
         if(repo.emailAddressExists(req.email))
             throw EmailAlreadyTakenException(req.email)
 
-        val newUser = AppUser.new(
+        val newUser = AppUser(
+            id = UserId.new(),
             appUserId = AppUserId(req.appUserId),
-            firstName = req.firstName,
-            lastName = req.lastName,
+            firstName = FirstName(req.firstName),
+            lastName = LastName(req.lastName),
             email = EmailAddress(req.email),
+            userStatus = UserStatus.ACTIVE,
             userRoles = req.userRoles
         )
 
@@ -50,10 +53,10 @@ class AppUserService(private val repo: AppUserRepository) : AppUserCommandServic
         if(repo.appUserIdExistsOnOtherUser(userId,AppUserId(req.appUserId)))
             throw DuplicateEntityException("User","Id", req.appUserId)
 
-        val updatedUser = existing.update(
+        val updatedUser = existing.copy(
             appUserId = AppUserId(req.appUserId),
-            firstName = req.firstName,
-            lastName = req.lastName,
+            firstName = FirstName(req.firstName),
+            lastName = LastName(req.lastName),
             email = EmailAddress(req.email),
             userStatus = req.userStatus,
             userRoles = req.userRoles

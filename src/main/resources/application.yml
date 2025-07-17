@@ -14,9 +14,10 @@ spring:
     username: vfin_usr
     password: root
   flyway:
-    #clean-disabled: true
-    baseline-on-migrate: true
-    #create-schemas: true
+    #clean-disabled: true         # Prevents Flyway from wiping the whole DB - should we used in prod with true
+    baseline-on-migrate: true     # Tells Flyway to assume the current DB is already at the base version
+    baselineVersion: 0
+    #create-schemas: true         #  V - versioned migration, U - undo,  R - repeatable, b - baseline
 
 
 

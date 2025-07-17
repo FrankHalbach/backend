@@ -17,8 +17,8 @@ data class UserResponse(
 fun AppUser.toResponse(): UserResponse = UserResponse(
     id = this.id.value.toString(),
     appUserId = this.appUserId.value,
-    firstName = this.firstName,
-    lastName = this.lastName,
+    firstName = this.firstName.toString(),
+    lastName = this.lastName.toString(),
     email = this.email.value,
     userStatus = this.userStatus,
     userRoles = this.userRoles

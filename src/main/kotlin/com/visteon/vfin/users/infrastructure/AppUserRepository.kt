@@ -1,19 +1,12 @@
 package com.visteon.vfin.users.infrastructure
 
-import com.visteon.vfin.users.model.AppUser
-import com.visteon.vfin.users.model.UserRole
-import com.visteon.vfin.users.model.AppUserId
 import com.visteon.vfin.sharedkernel.identifiers.UserId
 import com.visteon.vfin.sharedkernel.types.EmailAddress
-import org.jetbrains.exposed.v1.core.SqlExpressionBuilder.eq
+import com.visteon.vfin.users.model.*
 import org.jetbrains.exposed.v1.core.ResultRow
+import org.jetbrains.exposed.v1.core.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.v1.core.and
-import org.jetbrains.exposed.v1.jdbc.insert
-import org.jetbrains.exposed.v1.jdbc.batchInsert
-import org.jetbrains.exposed.v1.jdbc.selectAll
-import org.jetbrains.exposed.v1.jdbc.select
-import org.jetbrains.exposed.v1.jdbc.update
-import org.jetbrains.exposed.v1.jdbc.deleteWhere
+import org.jetbrains.exposed.v1.jdbc.*
 import org.springframework.stereotype.Repository
 
 
@@ -24,8 +17,8 @@ class AppUserRepository {
         AppUserEntity.insert {
             it[id] = user.id.value
             it[appUserId] = user.appUserId.value
-            it[firstName] = user.firstName
-            it[lastName] = user.lastName
+            it[firstName] = user.firstName.value
+            it[lastName] = user.lastName.value
             it[email] = user.email.value
             it[userStatus] = user.userStatus
         }
@@ -35,8 +28,8 @@ class AppUserRepository {
     fun update(user: AppUser) {
         AppUserEntity.update({ AppUserEntity.id eq user.id.value }) {
             it[appUserId] = user.appUserId.value
-            it[firstName] = user.firstName
-            it[lastName] = user.lastName
+            it[firstName] = user.firstName.value
+            it[lastName] = user.lastName.value
             it[email] = user.email.value
             it[userStatus] = user.userStatus
         }
@@ -86,9 +79,9 @@ class AppUserRepository {
     private fun fetchUserRoles(userId: UserId): Set<UserRole> =
         AppUserRolesEntity
             .select( AppUserRolesEntity.role)
-            .where { AppUserRolesEntity.userId eq userId.value }      
-            .map { it[AppUserRolesEntity.role] }      
-            .toSet()   
+            .where { AppUserRolesEntity.userId eq userId.value }
+            .map { it[AppUserRolesEntity.role].value }
+            .toSet()
 
     fun getAll(): List<AppUser> =
         (AppUserEntity innerJoin AppUserRolesEntity)
@@ -96,10 +89,9 @@ class AppUserRepository {
             .groupBy { it[AppUserEntity.id] }
             .map { (userId, rows) ->
                 val firstRow = rows.first()
-                val roles = rows.map { it[AppUserRolesEntity.role] }.toSet()
+                val roles = rows.map { it[AppUserRolesEntity.role].value }.toSet()
                 firstRow.toAppUser(roles)
             }
-
 
     private fun insertUserRoles(userId: UserId, roles: Set<UserRole>) {
         AppUserRolesEntity.batchInsert(roles) { role ->
@@ -112,15 +104,13 @@ class AppUserRepository {
         AppUserRolesEntity.deleteWhere { AppUserRolesEntity.userId eq userId.value }
         insertUserRoles(userId, newRoles)
     }
-
-
 }
 
-private fun ResultRow.toAppUser(userRoles: Set<UserRole>): AppUser = AppUser.load(
+private fun ResultRow.toAppUser(userRoles: Set<UserRole>): AppUser = AppUser(
     id = UserId(this[AppUserEntity.id].value),
     appUserId = AppUserId(this[AppUserEntity.appUserId]),
-    firstName = this[AppUserEntity.firstName],
-    lastName = this[AppUserEntity.lastName],
+    firstName = FirstName(this[AppUserEntity.firstName]),
+    lastName = LastName(this[AppUserEntity.lastName]) ,
     email = EmailAddress(this[AppUserEntity.email]),
     userStatus = this[AppUserEntity.userStatus],
     userRoles = userRoles
