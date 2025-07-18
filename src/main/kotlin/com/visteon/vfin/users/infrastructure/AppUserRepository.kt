@@ -87,7 +87,7 @@ class AppUserRepository {
         (AppUserEntity innerJoin AppUserRolesEntity)
             .selectAll()
             .groupBy { it[AppUserEntity.id] }
-            .map { (userId, rows) ->
+            .map { (_, rows) ->
                 val firstRow = rows.first()
                 val roles = rows.map { it[AppUserRolesEntity.role].value }.toSet()
                 firstRow.toAppUser(roles)

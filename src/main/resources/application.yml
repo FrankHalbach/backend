@@ -1,23 +1,49 @@
+
+
+---
+# dev config
 spring:
-  application:
-    name: backend
+  config:
+    activate:
+      on-profile: dev
   datasource:
-    #url: jdbc:mysql://localhost:3306/vfin
-    #username: root
-    #password: root
-    #driver-class-name: com.mysql.cj.jdbc.Driver
-#    url:jdbc:h2:mem:testdb
-#    driverClassName:org.h2.Driver
-#    username:sa
-#    password:password
+    url: jdbc:h2:mem:devdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  flyway:
+    enabled: false
+
+---
+# test config
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  flyway:
+    enabled: false
+
+
+---
+# prod config
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
     url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
     username: vfin_usr
     password: root
   flyway:
+    enabled: true
     #clean-disabled: true         # Prevents Flyway from wiping the whole DB - should we used in prod with true
-    baseline-on-migrate: true     # Tells Flyway to assume the current DB is already at the base version
-    baselineVersion: 0
+    #baseline-on-migrate: true     # Tells Flyway to assume the current DB is already at the base version
+    #baselineVersion: 0
     #create-schemas: true         #  V - versioned migration, U - undo,  R - repeatable, b - baseline
-
 
 

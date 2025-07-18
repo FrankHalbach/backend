@@ -4,7 +4,7 @@ val springModulithVersion: String by project
 plugins {
     kotlin("jvm") version "2.1.20"
     kotlin("plugin.spring") version "2.1.20"
-    id("org.springframework.boot") version "3.5.0"
+    id("org.springframework.boot") version "3.5.3"
     id("io.spring.dependency-management") version "1.1.7"
 
 }
@@ -53,7 +53,7 @@ dependencies {
 
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    //runtimeOnly("com.h2database:h2")
+    runtimeOnly("com.h2database:h2")
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9")
 

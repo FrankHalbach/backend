@@ -1,9 +1,7 @@
 package com.visteon.vfin.users.api
-import com.visteon.vfin.users.*
-import com.visteon.vfin.users.application.*
 import com.visteon.vfin.sharedkernel.identifiers.UserId
-import com.visteon.vfin.plant.application.PlantService
-import com.visteon.vfin.users.model.UserStatus
+import com.visteon.vfin.users.AppUserQueryService
+import com.visteon.vfin.users.application.*
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

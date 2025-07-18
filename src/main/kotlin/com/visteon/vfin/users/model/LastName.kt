@@ -7,7 +7,7 @@ import com.visteon.vfin.sharedkernel.validation.assertNotEmpty
 value class LastName private constructor(val value: String) {
     companion object {
         const val MAX_LENGTH = 255
-        const val FIELD_NAME = "Last Name";
+        const val FIELD_NAME = "Last Name"
         operator fun invoke(input: String): LastName {
             val validated = input
                 .trim()
