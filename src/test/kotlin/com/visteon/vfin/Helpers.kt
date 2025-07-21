@@ -4,14 +4,16 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import java.time.Duration
 
 
-class Helpers {
+object Helpers {
     fun baseUri(port: Long): String = "http://localhost:$port"
 
-    fun newWebClient(port: Long): WebTestClient {
-        return WebTestClient
+    fun newWebClient(port: Long): WebTestClient =
+        WebTestClient
             .bindToServer()
             .baseUrl(baseUri(port))
             .responseTimeout(Duration.ofSeconds(90))
             .build()
-    }
+
 }
+
+
