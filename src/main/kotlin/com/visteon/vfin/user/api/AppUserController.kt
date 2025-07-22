@@ -1,7 +1,7 @@
-package com.visteon.vfin.users.api
+package com.visteon.vfin.user.api
 import com.visteon.vfin.sharedkernel.identifiers.UserId
-import com.visteon.vfin.users.AppUserQueryService
-import com.visteon.vfin.users.application.*
+import com.visteon.vfin.user.AppUserQueryService
+import com.visteon.vfin.user.application.*
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

@@ -1,4 +1,4 @@
-package com.visteon.vfin.users.model
+package com.visteon.vfin.user.model
 
 import com.visteon.vfin.sharedkernel.validation.assertMatchesRegex
 import com.visteon.vfin.sharedkernel.validation.assertNotEmpty

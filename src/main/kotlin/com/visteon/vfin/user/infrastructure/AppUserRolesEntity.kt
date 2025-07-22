@@ -1,7 +1,7 @@
-package com.visteon.vfin.users.infrastructure
+package com.visteon.vfin.user.infrastructure
 
 import com.visteon.vfin.common.FieldLengths
-import com.visteon.vfin.users.model.UserRole
+import com.visteon.vfin.user.model.UserRole
 import org.jetbrains.exposed.v1.core.dao.id.CompositeIdTable
 
 object AppUserRolesEntity : CompositeIdTable("APP_USER_ROLE") {

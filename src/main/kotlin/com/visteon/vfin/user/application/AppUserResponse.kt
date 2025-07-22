@@ -1,8 +1,8 @@
-package com.visteon.vfin.users.application
+package com.visteon.vfin.user.application
 
-import com.visteon.vfin.users.model.AppUser
-import com.visteon.vfin.users.model.UserStatus
-import com.visteon.vfin.users.model.UserRole
+import com.visteon.vfin.user.model.AppUser
+import com.visteon.vfin.user.model.UserStatus
+import com.visteon.vfin.user.model.UserRole
 
 data class UserResponse(
     val id: String,

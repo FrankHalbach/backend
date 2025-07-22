@@ -1,4 +1,4 @@
-package com.visteon.vfin.users.model
+package com.visteon.vfin.user.model
 
 enum class UserStatus {
     ACTIVE,

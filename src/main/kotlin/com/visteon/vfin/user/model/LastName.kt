@@ -1,4 +1,4 @@
-package com.visteon.vfin.users.model
+package com.visteon.vfin.user.model
 
 import com.visteon.vfin.sharedkernel.validation.assertMaxLength
 import com.visteon.vfin.sharedkernel.validation.assertNotEmpty

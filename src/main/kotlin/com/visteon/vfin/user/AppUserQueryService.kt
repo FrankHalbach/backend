@@ -1,6 +1,6 @@
-package com.visteon.vfin.users
+package com.visteon.vfin.user
 
-import com.visteon.vfin.users.model.AppUser
+import com.visteon.vfin.user.model.AppUser
 import com.visteon.vfin.sharedkernel.identifiers.UserId
 
 

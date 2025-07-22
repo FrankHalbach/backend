@@ -21,7 +21,7 @@ class PlantApi {
 
 
     fun createPlant(plantRequest: TestPlantCreationRequest): ResponseSpec =
-        Helpers.newWebClient(port.toLong())
+        Helpers.newWebClient(port)
             .post()
             .uri(plantPath)
             .bodyValue(plantRequest)
@@ -37,7 +37,7 @@ class PlantApi {
 
 
     fun getPlant(plantUri: URI): ResponseSpec {
-        return Helpers.newWebClient(port.toLong())
+        return Helpers.newWebClient(port)
             .get()
             .uri(plantUri)
             .exchange()
@@ -45,14 +45,14 @@ class PlantApi {
 
     fun getAllPlants(): ResponseSpec =
         Helpers
-            .newWebClient(port.toLong())
+            .newWebClient(port)
             .get()
             .uri(plantPath)
             .exchange()
 
 
     fun updatePlant(id: UUID, plantUpdateRequest: TestPlantUpdateRequest): ResponseSpec =
-        Helpers.newWebClient(port.toLong())
+        Helpers.newWebClient(port)
             .put()
             .uri(uriForPlantId(id))
             .bodyValue(plantUpdateRequest)

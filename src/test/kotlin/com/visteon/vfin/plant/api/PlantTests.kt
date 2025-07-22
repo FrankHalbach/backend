@@ -26,7 +26,7 @@ class PlantTests {
     }
 
     @Test
-    fun `given a non-existing plant, when I get it`() {
+    fun `given a non-existing plant, when I get request it`() {
         val nonExistingId = UUID.randomUUID()
 
         val response = plantApi.getPlant(nonExistingId)

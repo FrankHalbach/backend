@@ -1,8 +1,8 @@
-package com.visteon.vfin.users.infrastructure
+package com.visteon.vfin.user.infrastructure
 
 import com.visteon.vfin.sharedkernel.identifiers.UserId
 import com.visteon.vfin.sharedkernel.types.EmailAddress
-import com.visteon.vfin.users.model.*
+import com.visteon.vfin.user.model.*
 import org.jetbrains.exposed.v1.core.ResultRow
 import org.jetbrains.exposed.v1.core.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.v1.core.and

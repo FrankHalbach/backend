@@ -1,7 +1,7 @@
-package com.visteon.vfin.users.infrastructure
+package com.visteon.vfin.user.infrastructure
 
 import com.visteon.vfin.sharedkernel.types.EmailAddress
-import com.visteon.vfin.users.model.UserStatus
+import com.visteon.vfin.user.model.UserStatus
 import org.jetbrains.exposed.v1.core.dao.id.UUIDTable
 import com.visteon.vfin.common.FieldLengths
 

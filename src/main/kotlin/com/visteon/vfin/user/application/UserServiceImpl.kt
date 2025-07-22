@@ -1,19 +1,19 @@
-package com.visteon.vfin.users.application
+package com.visteon.vfin.user.application
 
 import com.visteon.vfin.exception.DuplicateEntityException
 import com.visteon.vfin.exception.EmailAlreadyTakenException
 import com.visteon.vfin.exception.EntityNotFoundException
-import com.visteon.vfin.users.infrastructure.AppUserRepository
-import com.visteon.vfin.users.model.AppUser
-import com.visteon.vfin.users.model.AppUserId
+import com.visteon.vfin.user.infrastructure.AppUserRepository
+import com.visteon.vfin.user.model.AppUser
+import com.visteon.vfin.user.model.AppUserId
 import com.visteon.vfin.sharedkernel.identifiers.UserId
 import com.visteon.vfin.sharedkernel.types.EmailAddress
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import com.visteon.vfin.users.AppUserQueryService
-import com.visteon.vfin.users.model.FirstName
-import com.visteon.vfin.users.model.LastName
-import com.visteon.vfin.users.model.UserStatus
+import com.visteon.vfin.user.AppUserQueryService
+import com.visteon.vfin.user.model.FirstName
+import com.visteon.vfin.user.model.LastName
+import com.visteon.vfin.user.model.UserStatus
 
 
 @Transactional

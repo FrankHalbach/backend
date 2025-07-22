@@ -1,6 +1,6 @@
 package com.visteon.vfin.sharedkernel.identifiers
 
-import com.visteon.vfin.users.model.AppUserId
+import com.visteon.vfin.user.model.AppUserId
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import kotlin.test.assertFailsWith

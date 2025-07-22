@@ -1,19 +1,20 @@
-package com.visteon.vfin.users.application
+package com.visteon.vfin.user.application
 
 import com.visteon.vfin.common.FieldLengths
-import com.visteon.vfin.users.model.AppUserId
-import com.visteon.vfin.users.model.UserStatus
-import com.visteon.vfin.users.model.UserRole
+import com.visteon.vfin.user.model.AppUserId
+import com.visteon.vfin.user.model.UserStatus
+import com.visteon.vfin.user.model.UserRole
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
 import jakarta.validation.constraints.NotEmpty
 
-data class AppUserUpdateRequest(
+
+data class AppUserCreationRequest(
 
     @field:NotBlank
-    @field:Pattern(regexp = AppUserId.REGEX_PATTERN, message = AppUserId.VALIDATION_MESSAGE)
+    @field:Pattern(regexp = AppUserId.Companion.REGEX_PATTERN, message = AppUserId.Companion.VALIDATION_MESSAGE)
     val appUserId: String,
 
     @field:NotBlank
@@ -28,9 +29,9 @@ data class AppUserUpdateRequest(
     @field:Email
     val email: String,
 
+    // need validation
     val userStatus: UserStatus,
 
     @field:NotEmpty(message = "At least one role must be assigned")
     val userRoles: Set<UserRole>
-
 )

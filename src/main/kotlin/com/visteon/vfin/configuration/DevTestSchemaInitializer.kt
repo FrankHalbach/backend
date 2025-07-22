@@ -2,7 +2,7 @@ package com.visteon.vfin.configuration
 
 import com.visteon.vfin.plant.PlantSchema
 import com.visteon.vfin.project.ProjectSchema
-import com.visteon.vfin.users.UserSchema
+import com.visteon.vfin.user.UserSchema
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Profile
