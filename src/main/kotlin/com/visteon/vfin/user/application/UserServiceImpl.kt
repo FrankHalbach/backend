@@ -15,7 +15,7 @@ import com.visteon.vfin.user.model.FirstName
 import com.visteon.vfin.user.model.LastName
 import com.visteon.vfin.user.model.UserStatus
 
-
+//todo: split into two classes
 @Transactional
 @Service
 class AppUserService(private val repo: AppUserRepository) : AppUserCommandService, AppUserQueryService {

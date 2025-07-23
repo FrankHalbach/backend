@@ -18,5 +18,6 @@ value class Year(val value: Int) : Comparable<Year> {
     companion object {
         const val YEAR_MIN = 2000
         const val YEAR_MAX = 2999
+        const val REGEX_STRING ="^\\d{4}$"
     }
 }
