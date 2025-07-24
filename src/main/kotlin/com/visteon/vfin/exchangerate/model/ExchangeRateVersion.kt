@@ -1,7 +1,9 @@
 package com.visteon.vfin.exchangerate.model
 
-import com.visteon.vfin.exchangerate.Currency
+import com.visteon.vfin.currency.Currency
+import com.visteon.vfin.exchangerate.ExchangeRateVersionId
 import com.visteon.vfin.sharedkernel.types.AuditInfo
+import java.time.Instant
 
 data class ExchangeRateVersion(
     val id: ExchangeRateVersionId,
@@ -9,7 +11,8 @@ data class ExchangeRateVersion(
     val description: String,
     val consolidationCurrency: Currency,
     val status: ExchangeRateVersionStatus,
-    val auditInfo: AuditInfo
+    val auditInfo: AuditInfo,
+    val releasedAt: Instant?
 )
 
 

@@ -1,5 +1,6 @@
 package com.visteon.vfin.exchangerate
 
+import com.visteon.vfin.currency.Currency
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

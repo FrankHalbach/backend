@@ -49,8 +49,8 @@ class PlantRepository
         .selectAll()
         .where(PlantEntity.id eq plantId.value)
         .firstOrNull()
-        ?.toDomain()
+        ?.toPlant()
 
-    fun getAll(): List<Plant> = PlantEntity.selectAll().map { it.toDomain() }
+    fun getAll(): List<Plant> = PlantEntity.selectAll().map { it.toPlant() }
 
 }

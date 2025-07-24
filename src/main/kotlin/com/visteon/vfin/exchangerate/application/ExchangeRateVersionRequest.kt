@@ -4,7 +4,7 @@ import com.visteon.vfin.common.FieldLengths
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 
-data class CreateExchangeRateVersionRequest(
+data class ExchangeRateVersionRequest(
 
     @field:NotBlank
     @field:Size(max =  FieldLengths.LABEL_MAX)
@@ -15,5 +15,3 @@ data class CreateExchangeRateVersionRequest(
     val description: String
 
 )
-
-

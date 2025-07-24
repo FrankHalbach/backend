@@ -3,10 +3,11 @@ package com.visteon.vfin.exchangerate.application
 import com.visteon.vfin.exchangerate.model.ExchangeRateVersion
 import com.visteon.vfin.exchangerate.model.ExchangeRateVersionStatus
 import java.time.Instant
+import java.util.UUID
 
 
 data class ExchangeRateVersionResponse(
-    val id:String,
+    val id: UUID,
     val versionName:String,
     val description:String,
     val consolidationCurrency:String,
@@ -16,11 +17,11 @@ data class ExchangeRateVersionResponse(
 )
 
 fun ExchangeRateVersion.toResponse(): ExchangeRateVersionResponse= ExchangeRateVersionResponse(
-    id = this.id.value.toString(),
+    id = this.id.value,
     versionName = this.versionName,
     description = this.description,
     consolidationCurrency = this.consolidationCurrency.toString(),
-    status=this.status,
-    lastUpdatedBy = this.auditInfo.lastUpdatedBy.toString(),
+    status = this.status,
+    lastUpdatedBy = this.auditInfo.lastUpdatedBy.value.toString(),
     lastUpdatedAt = this.auditInfo.lastUpdatedAt
 )

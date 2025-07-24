@@ -1,6 +1,6 @@
-package com.visteon.vfin.exchangerate.application
+package com.visteon.vfin.currency.application
 
-import com.visteon.vfin.exchangerate.Currency
+import com.visteon.vfin.currency.Currency
 import java.util.Locale
 
 data class CurrencyResponse (

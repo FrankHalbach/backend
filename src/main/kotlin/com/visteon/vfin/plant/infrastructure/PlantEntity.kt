@@ -21,7 +21,7 @@ object PlantEntity : UUIDTable("PLANT") {
 }
 
 
-fun ResultRow.toDomain(): Plant = Plant(
+fun ResultRow.toPlant(): Plant = Plant(
     PlantId(this[PlantEntity.id].value),
     this[PlantEntity.code],
     this[PlantEntity.name],

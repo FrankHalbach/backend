@@ -4,8 +4,9 @@ import com.visteon.vfin.sharedkernel.types.Year
 import com.visteon.vfin.sharedkernel.types.YearMonth
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
+import org.springframework.modulith.NamedInterface
 
-
+@NamedInterface
 class YearMonthValidator : ConstraintValidator<ValidYearMonth, String> {
 
     override fun isValid(value: String?, context: ConstraintValidatorContext): Boolean {

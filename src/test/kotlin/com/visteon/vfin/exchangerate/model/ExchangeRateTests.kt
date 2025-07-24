@@ -1,6 +1,6 @@
 package com.visteon.vfin.exchangerate.model
 
-import com.visteon.vfin.exchangerate.Currency
+import com.visteon.vfin.currency.Currency
 import com.visteon.vfin.sharedkernel.types.Money
 import com.visteon.vfin.sharedkernel.types.YearMonth
 import org.junit.jupiter.api.Test

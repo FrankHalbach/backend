@@ -1,5 +1,6 @@
 package com.visteon.vfin.configuration
 
+import com.visteon.vfin.currency.CurrencySchema
 import com.visteon.vfin.exchangerate.ExchangeRateSchema
 import com.visteon.vfin.plant.PlantSchema
 import com.visteon.vfin.project.ProjectSchema
@@ -21,6 +22,7 @@ class DevTestSchemaInitializer : ApplicationRunner {
         UserSchema.initialize()
         ProjectSchema.initialize()
         PlantSchema.initialize()
+        CurrencySchema.initialize()
         ExchangeRateSchema.initialize()
 
     }

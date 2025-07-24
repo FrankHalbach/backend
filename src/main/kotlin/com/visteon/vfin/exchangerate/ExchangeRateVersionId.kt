@@ -1,4 +1,4 @@
-package com.visteon.vfin.exchangerate.model
+package com.visteon.vfin.exchangerate
 
 import com.visteon.vfin.common.Ids
 import java.util.UUID

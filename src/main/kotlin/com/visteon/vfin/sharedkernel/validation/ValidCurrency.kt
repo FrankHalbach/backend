@@ -6,11 +6,11 @@ import org.springframework.modulith.NamedInterface
 import kotlin.reflect.KClass
 
 @NamedInterface
-@Target(AnnotationTarget.FIELD, AnnotationTarget.VALUE_PARAMETER)
+@Target(AnnotationTarget.FIELD, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.PROPERTY_GETTER)
 @Retention(AnnotationRetention.RUNTIME)
-@Constraint(validatedBy = [YearMonthValidator::class])
-annotation class ValidYearMonth(
-    val message: String = "Invalid year-month, must be yyyy-MM between 2000-01 and 2999-12",
+@Constraint(validatedBy = [CurrencyCodeValidator::class])
+annotation class ValidCurrency(
+    val message: String = "Unsupported currency code",
     val groups: Array<KClass<*>> = [],
     val payload: Array<KClass<out Payload>> = []
 )
