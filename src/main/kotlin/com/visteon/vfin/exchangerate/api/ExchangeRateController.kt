@@ -10,6 +10,14 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
+/*
+
+ Manage exchange rate version and exchange rates
+  - create, edit and release exchange rates version
+  - add rates to version, create, edit, delete month
+  - import rates from other version
+
+* */
 @RestController
 @RequestMapping("/api/exchangeRates")
 class ExchangeRateController(
